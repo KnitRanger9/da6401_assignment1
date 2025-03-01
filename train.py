@@ -1,6 +1,12 @@
 #Making NN from scratch: Day 1
+!pip install wandb
+
 import numpy as np
 import pandas as pd
+from keras.datasets import fashion_mnist
+import wandb
+from sklearn.model_selection import train_test_split
+from tqdm import tqdm
 
 class Neuron:
   def __init__(self, weight, bias, lr):
