@@ -8,6 +8,9 @@ import wandb
 from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 
+#Question1
+(X_train, X_test), (y_train, y_test) = fashion_mnist.load_data()
+
 class Neuron:
   def __init__(self, weight, bias, lr):
     self.w=weight
