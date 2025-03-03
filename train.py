@@ -18,62 +18,78 @@ X_train = X_train/255
 X_test = X_test/255
 
 class Neuron:
-  def __init__(self):
-    self.data=0.0
+  def __init__(self, data =0.0):
+    self.data = data
 
-def visualze_data():
+def visualize_data():
   plt.figure(figsize=(10,10))
   
   for i in range(5):
     plt.subplot(1,5,i+1)
-    plt.imshow(f"Image {i+1}:")
-    print(X_train[i])
+    plt.imshow(X_train[i], cmap="gray")
+    plt.title(f"Image {i+1}")
   plt.show()
 
 class Layer(Neuron):
-  def __init__(self, n):
-    self.n_in = n
-    self.data = np.zeros(n)
-    self.neurons = [Neuron() for _ in range(n)]
-    for i in range(n):
-      self.data[i] = self.neurons[i].data
+  def __init__(self, n_input, n_output, activation, data = 0.0):
+    self.n_input = n_input
+    self.n_output = n_output
+    self.activation = activation
+    self.weights = np.random.rand(n_output, n_input)
+    self.bias = np.random.rand(n_output, 1)
+    self.neurons = [Neuron() for _ in range(n_output)]
+    self.data = data #np.zeros(self.n_input)
+    
+  def forward(self, inputs):
+    self.data = inputs
+    for i in range(self.n_output):
+      self.neurons[i].data = self.activation(np.dot(self.weights[i], inputs) + self.bias[i])
 
 class NeuralNetwork:
-  def __init__(self, n_inputs, n_hidden, n_outputs):
+  """
+  variables:
+    n_layers: Number of layers in the network
+    activation: Activation function for hidden layers
+    output_activation: Activation function for output layer
+    layers: List of layers in the network
+    weights: List of weights for each layer
+    bias: List of bias for each layer
 
-    self.input_layer = Layer(n_inputs)
+  methods:
+  - forward: Forward pass through the network
+  - backward: Backward pass through the network
+  """
+  def __init__(self, n_layers, activation, output_activation):
+    self.n_layers = n_layers
+    self.activation = activation
+    self.output_activation = output_activation
+    self.layers = []
+    self.weights = []
     self.bias = []
 
-    for i in range(n_inputs):
-      self.input_layer.data[i] = self.input_layer.neurons[i].data
-      # self.weights_ih = np.zeros(n_inputs, dtype=float)
+    n_input = int(input(f"Enter number of neurons in Input layer: "))
+    self.layers.append(Layer(n_input, 0, activation))
+    for i in range(n_layers-2):
+      n_output = int(input(f"Enter number of neurons in layer {i+1}: "))
+      self.layers.append(Layer(n_input, n_output, activation))
+      self.weights.append(self.layers[i].weights)
+      self.bias.append(self.layers[i].bias)
+      n_input = n_output
+    n_output = int(input(f"Enter number of neurons in Output layer: "))
+    n_input = len(self.layers[-1].neurons)
+    self.layers.append(Layer(n_input, n_output, output_activation))
+    self.weights.append(self.layers[-1].weights)
+    self.bias.append(self.layers[-1].bias)
 
-    self.hidden_layer = []
-    self.weights_hidden = []
 
-    for i in range(n_hidden):
-      n = int(input(f"Enter number of neurons in hidden layer {i}: "))
-      self.hidden_layer.append(Layer(n))
-      self.weights_hidden.append(np.random.rand(0,high=1,size=(n, n_inputs)))
-      n_inputs = n
-      if i ==n_hidden - 1:
-        self.weights_hidden.append(np.random.rand(0,high=1,size=(n_outputs, n_inputs)))
-      self.bias.append(0.0)
-    
-    self.output_layer = Layer(n_outputs)
-    self.weights_hidden.append(np.random.rand(0,high=1,size=(n_outputs, n_inputs)))
-    self.lr = 0.1
-
-    def modify(self):
-      self.hidden_layer = []
+    def modify(self, n_hidden):
+      self.layers = []
       for i in range(n_hidden):
         n = int(input(f"Enter number of neurons in hidden layer {i}: "))
-        self.hidden_layer.append(Layer(n_hidden))
+        self.layers.append(Layer(n_hidden))
 
     def forward(self, inputs):
-      self.input_layer.data = inputs
-      self.hidden_layer.data = np.dot(self.weights_ih, inputs) + self.bias_h
-      self.hidden_layer.data = self.sigmoid(self.hidden_layer.data)
-      self.output_layer.data = np.dot(self.weights_ho, self.hidden_layer.data) + self.bias_o
-      self.output_layer.data = self.sigmoid(self.output_layer.data)
-      return self.output_layer.data
+      for i in range(len(self.layers)):
+        inputs = self.activation(np.dot(self.weights[i], inputs) + self.bias[i])
+        self.layers[i].data = inputs
+      return inputs
