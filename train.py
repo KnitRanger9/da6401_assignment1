@@ -40,19 +40,28 @@ class Layer(Neuron):
 
 class NeuralNetwork:
   def __init__(self, n_inputs, n_hidden, n_outputs):
+
     self.input_layer = Layer(n_inputs)
+    self.bias = []
+
     for i in range(n_inputs):
       self.input_layer.data[i] = self.input_layer.neurons[i].data
+      # self.weights_ih = np.zeros(n_inputs, dtype=float)
+
     self.hidden_layer = []
+    self.weights_hidden = []
+
     for i in range(n_hidden):
       n = int(input(f"Enter number of neurons in hidden layer {i}: "))
-      self.hidden_layer.append(Layer(n_hidden))
-    self.hidden_layer = Layer(n_hidden)
+      self.hidden_layer.append(Layer(n))
+      self.weights_hidden.append(np.random.rand(0,high=1,size=(n, n_inputs)))
+      n_inputs = n
+      if i ==n_hidden - 1:
+        self.weights_hidden.append(np.random.rand(0,high=1,size=(n_outputs, n_inputs)))
+      self.bias.append(0.0)
+    
     self.output_layer = Layer(n_outputs)
-    self.weights_ih = np.random.rand(n_hidden, n_inputs)
-    self.weights_ho = np.random.rand(n_outputs, n_hidden)
-    self.bias_h = np.random.rand(n_hidden)
-    self.bias_o = np.random.rand(n_outputs)
+    self.weights_hidden.append(np.random.rand(0,high=1,size=(n_outputs, n_inputs)))
     self.lr = 0.1
 
     def modify(self):
