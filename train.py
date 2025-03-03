@@ -1,5 +1,5 @@
 #Making NN from scratch: Day 1
-!pip install wandb
+# !pip install wandb
 
 import numpy as np
 import pandas as pd
@@ -8,8 +8,13 @@ import wandb
 from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 
+run = wandb.init(project="fashion_mnist")
+
 #Question1
 (X_train, X_test), (y_train, y_test) = fashion_mnist.load_data()
+# Normalise
+X_train = X_train/255
+X_test = X_test/255
 
 class Neuron:
   def __init__(self, weight, bias, lr):
