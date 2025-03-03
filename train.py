@@ -7,6 +7,7 @@ from keras.datasets import fashion_mnist
 import wandb
 from sklearn.model_selection import train_test_split
 from tqdm import tqdm
+import matplotlib.pyplot as plt
 
 run = wandb.init(project="fashion_mnist")
 
@@ -19,6 +20,15 @@ X_test = X_test/255
 class Neuron:
   def __init__(self):
     self.data=0.0
+
+def visualze_data():
+  plt.figure(figsize=(10,10))
+  
+  for i in range(5):
+    plt.subplot(1,5,i+1)
+    plt.imshow(f"Image {i+1}:")
+    print(X_train[i])
+  plt.show()
 
 class Layer(Neuron):
   def __init__(self, n):
@@ -44,6 +54,12 @@ class NeuralNetwork:
     self.bias_h = np.random.rand(n_hidden)
     self.bias_o = np.random.rand(n_outputs)
     self.lr = 0.1
+
+    def modify(self):
+      self.hidden_layer = []
+      for i in range(n_hidden):
+        n = int(input(f"Enter number of neurons in hidden layer {i}: "))
+        self.hidden_layer.append(Layer(n_hidden))
 
     def forward(self, inputs):
       self.input_layer.data = inputs
