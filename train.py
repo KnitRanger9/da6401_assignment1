@@ -89,17 +89,9 @@ def nadam(weights, bias, lr, epsilon, beta1, beta2, v_w, v_b, m_w, m_b):
   weights -= lr*(m_w_prev/(np.sqrt(v_w_prev) + epsilon) + beta1*(m_w - m_w_prev)/(np.sqrt(v_w) + epsilon))
   bias -= lr*(m_b_prev/(np.sqrt(v_b_prev) + epsilon) + beta1*(m_b - m_b_prev)/(np.sqrt(v_b) + epsilon))
 
-class Neuron:
-  """
-  meta: A neuron object to represent a single neuron unit in layer
 
-  variables:
-  - data: The output stored by the neuron
-  """
-  def __init__(self, data =0.0):
-    self.data = data
 
-class Layer(Neuron):
+class Layer:
   """
   meta: A Layer object combining several neurons to form a single layer
 
@@ -114,19 +106,18 @@ class Layer(Neuron):
   - forward: Forward pass through the layer
   - backward: Backward pass through the layer to update weights and bias
   """
-  def __init__(self, n_input, n_output, activation, data = 0.0):
+  def __init__(self, n_input, n_output):
     self.n_input = n_input
     self.n_output = n_output
-    self.activation = activation
-    self.weights = np.random.rand(n_output, n_input)
-    self.bias = np.random.rand(n_output, 1)
-    self.neurons = [Neuron() for _ in range(n_output)]
-    self.data = data #np.zeros(self.n_input)
+    self.weights = np.random.rand(n_output, n_input+1)
+    # self.bias = np.random.rand(n_output, 1)
+    self.neurons = np.zeros(self.n_output,1)
     
   def forward(self, inputs):
-    self.data = inputs
+    inputs = np.concatenate((inputs, np.ones((1,inputs.shape[1]))))
+    output = self.activation(np.dot(self.weights, inputs))
     for i in range(self.n_output):
-      self.neurons[i].data = self.activation(np.dot(self.weights[i], inputs) + self.bias[i])
+      self.neurons[i] = self.activation(np.dot(self.weights[i], inputs) + self.bias[i])
 
 class NeuralNetwork:
   """
@@ -176,8 +167,22 @@ class NeuralNetwork:
       self.layers[i].data = inputs
     return inputs
 
+  #Weights and Bias update
+  def w_b_update(layer, weights, bias):
+    try:
+
+
+  # def train(self, X, epochs=100):
+  #   input=X
+  #   for _ in range(epochs):
+  #     for i in range(self.n_layers):
+  #       w = self.weights[i]
+  #       b = self.bias[i]
+  #       y = np.dot(w.T, input) + b
+      
+
 #1. layers update function for weights and biases
 #2. backprop function
-#3. Add Accuracy parameters
+#3 Train function (epoch, lr, etc as per optimzer used, along with accuracy params)
 #4. Prediction function
 #5. Integrate with wandb
