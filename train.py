@@ -81,6 +81,8 @@ class NeuralNetwork:
     self.weights.append(self.layers[-1].weights)
     self.bias.append(self.layers[-1].bias)
 
+    def construct()
+
 
     def modify(self, n_hidden):
       self.layers = []
