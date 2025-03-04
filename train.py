@@ -176,3 +176,8 @@ class NeuralNetwork:
       self.layers[i].data = inputs
     return inputs
 
+#1. layers update function for weights and biases
+#2. backprop function
+#3. Add Accuracy parameters
+#4. Prediction function
+#5. Integrate with wandb
