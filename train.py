@@ -139,6 +139,7 @@ class NeuralNetwork:
     bias: List of bias for each layer
 
   methods:
+  - construct: Creates a NeuralNetwork
   - forward: Forward pass through the network
   - backward: Backward pass through the network
   """
@@ -150,32 +151,28 @@ class NeuralNetwork:
     self.weights = []
     self.bias = []
 
+  def construct(self):
+
     n_input = int(input(f"Enter number of neurons in Input layer: "))
-    self.layers.append(Layer(n_input, 0, activation))
-    for i in range(n_layers-1):
+
+    for i in range(self.n_layers-1):
+      if i == self.n_layers-1:
+        n_output = int(input(f"Enter number of neurons in Output layer: "))
+        self.layers.append(Layer(n_input, n_output, self.output_activation))
+        self.weights.append(self.layers.weights)
+        self.bias.append(self.layers.bias)
       n_output = int(input(f"Enter number of neurons in layer {i+1}: "))
-      self.layers.append(Layer(n_input, n_output, activation))
+      self.layers.append(Layer(n_input, n_output, self.activation))
       self.weights.append(self.layers[i].weights)
       self.bias.append(self.layers[i].bias)
       n_input = n_output
-    n_output = int(input(f"Enter number of neurons in Output layer: "))
-    n_input = len(self.layers[-1].neurons)
-    self.layers.append(Layer(n_input, n_output, output_activation))
-    self.weights.append(self.layers[-1].weights)
-    self.bias.append(self.layers[-1].bias)
+    # n_output = int(input(f"Enter number of neurons in Output layer: "))
+    # n_input = len(self.layers[-1].neurons)
+    
 
-    def construct
-
-
-    def modify(self, n_hidden):
-      self.layers = []
-      for i in range(n_hidden):
-        n = int(input(f"Enter number of neurons in hidden layer {i}: "))
-        self.layers.append(Layer(n_hidden))
-
-    def forward(self, inputs):
-      for i in range(len(self.layers)):
-        inputs = self.activation(np.dot(self.weights[i], inputs) + self.bias[i])
-        self.layers[i].data = inputs
-      return inputs
+  def forward(self, inputs):
+    for i in range(len(self.layers)):
+      inputs = self.activation(np.dot(self.weights[i], inputs) + self.bias[i])
+      self.layers[i].data = inputs
+    return inputs
 
