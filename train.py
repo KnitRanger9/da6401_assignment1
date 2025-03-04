@@ -110,14 +110,14 @@ class Layer:
     self.n_input = n_input
     self.n_output = n_output
     self.weights = np.random.rand(n_output, n_input+1)
-    # self.bias = np.random.rand(n_output, 1)
     self.neurons = np.zeros(self.n_output,1)
     
   def forward(self, inputs):
     inputs = np.concatenate((inputs, np.ones((1,inputs.shape[1]))))
     output = self.activation(np.dot(self.weights, inputs))
     for i in range(self.n_output):
-      self.neurons[i] = self.activation(np.dot(self.weights[i], inputs) + self.bias[i])
+      self.neurons[i] = output[i]
+    return output
 
 class NeuralNetwork:
   """
@@ -149,16 +149,14 @@ class NeuralNetwork:
     for i in range(self.n_layers-1):
       if i == self.n_layers-1:
         n_output = int(input(f"Enter number of neurons in Output layer: "))
-        self.layers.append(Layer(n_input, n_output, self.output_activation))
-        self.weights.append(self.layers.weights)
-        self.bias.append(self.layers.bias)
+        np.append(self.layers,Layer(n_input, n_output, self.output_activation))
+        np.append(self.weights, self.layers[-1].weights)
+        np.append(self.bias,self.layers[-1].bias)
       n_output = int(input(f"Enter number of neurons in layer {i+1}: "))
-      self.layers.append(Layer(n_input, n_output, self.activation))
-      self.weights.append(self.layers[i].weights)
-      self.bias.append(self.layers[i].bias)
+      np.append(self.layers,Layer(n_input, n_output, self.activation))
+      np.append(self.weights,self.layers[i].weights)
+      np.append(self.bias,self.layers[i].bias)
       n_input = n_output
-    # n_output = int(input(f"Enter number of neurons in Output layer: "))
-    # n_input = len(self.layers[-1].neurons)
     
 
   def forward(self, inputs):
@@ -167,9 +165,8 @@ class NeuralNetwork:
       self.layers[i].data = inputs
     return inputs
 
-  #Weights and Bias update
-  def w_b_update(layer, weights, bias):
-    try:
+  def backward(self, target):
+    delta_matrix=np.zeros()
 
 
   # def train(self, X, epochs=100):
