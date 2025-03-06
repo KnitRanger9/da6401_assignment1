@@ -5,17 +5,10 @@ import numpy as np
 import pandas as pd
 from keras.datasets import fashion_mnist
 import wandb
-from sklearn.model_selection import train_test_split
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 
-run = wandb.init(project="fashion_mnist")
 
-#Question1
-(X_train, X_test), (y_train, y_test) = fashion_mnist.load_data()
-# Normalise
-X_train = X_train/255
-X_test = X_test/255
 
 def visualize_data():
   plt.figure(figsize=(10,10))
@@ -26,22 +19,31 @@ def visualize_data():
     plt.title(f"Image {i+1}")
   plt.show()
 
-#Helper function
+#Helper functions
+
+  #Activation functions
 def sigmoid(x):
   f_x = lambda x: 1/(1+np.exp(-x))
   df_x = lambda x: f_x(x)*(1-f_x(x))
-  return f_x, df_x
+  return f_x(x), df_x(x)
 
 def relu(x):
   f_x = lambda x: np.maximum(0,x)
   df_x = lambda x: np.where(x>0, 1, 0)
-  return f_x, df_x
+  return f_x(x), df_x(x)
 
 def tanh(x):
   f_x = lambda x: np.tanh(x)
   df_x = lambda x: 1 - np.tanh(x)**2
-  return f_x, df_x
+  return f_x(x), df_x(x)
 
+def softmax(x):
+  ans=np.array([])
+  for i in range(len(x)):
+    np.append(ans, np.exp(x[i])/np.sum(np.exp(x)))
+  return ans
+
+  #Optimizers
 def sgd(weights, bias, lr, grad_w, grad_b):
   weights -= lr*grad_w
   bias -= lr*grad_b
@@ -111,15 +113,17 @@ class Layer:
     self.n_output = n_output
     self.weights = np.random.rand(n_output, n_input+1)
     self.neurons = np.zeros(self.n_output,1)
-    
-  def forward(self, inputs):
-    inputs = np.concatenate((inputs, np.ones((1,inputs.shape[1]))))
-    output = self.activation(np.dot(self.weights, inputs))
-    for i in range(self.n_output):
-      self.neurons[i] = output[i]
-    return output
 
-class NeuralNetwork:
+  # forward inside Layer??
+    
+  # def forward(self, inputs):
+  #   inputs = np.concatenate((inputs, np.ones((1,inputs.shape[1]))))
+  #   output = self.activation(np.dot(self.weights, inputs))
+  #   for i in range(self.n_output):
+  #     self.neurons[i] = output[i]
+  #   return output
+
+class NeuralNetwork(Layer):
   """
   variables:
     n_layers: Number of layers in the network
@@ -134,13 +138,14 @@ class NeuralNetwork:
   - forward: Forward pass through the network
   - backward: Backward pass through the network
   """
-  def __init__(self, n_layers, activation, output_activation):
+  def __init__(self, n_layers, activation, output_activation, optimizer):
     self.n_layers = n_layers
     self.activation = activation
     self.output_activation = output_activation
     self.layers = []
     self.weights = []
     self.bias = []
+    self.optimizer = optimizer
 
   def construct(self):
 
@@ -166,7 +171,7 @@ class NeuralNetwork:
     return inputs
 
   def backward(self, target):
-    delta_matrix=np.zeros()
+    delta_matrix=np.zeros(self.n_layers, dtype=np.float)
 
 
   # def train(self, X, epochs=100):
@@ -176,7 +181,36 @@ class NeuralNetwork:
   #       w = self.weights[i]
   #       b = self.bias[i]
   #       y = np.dot(w.T, input) + b
-      
+
+if __name__ == '__main__':
+  # def __init__(self, n_layers, activation, output_activation):
+
+  run = wandb.init(project="fashion_mnist")
+
+  #Question1
+  (X_train, X_test), (y_train, y_test) = fashion_mnist.load_data()
+  # Normalise
+  X_train = X_train/255
+  X_test = X_test/255
+
+  n_layers=int(input("Enter the number of layers in the neural network: "))
+  activation=input("Enter the activation function for hidden layers (e.g., sigmoid, ReLU, tanh): ")
+
+  match activation:
+    case "sigmoid":
+      activation_function=sigmoid()
+    case "relu":
+      activation_function=relu()
+    case "tanh":
+      activation_function=tanh()
+
+  output_activation_function=softmax()
+  # Create a Neural Network object with given number of layers, activation function and output activation function
+  # nn=NeuralNetwork(n_layers, activation, output_activation)
+  nn=NeuralNetwork(n_layers=n_layers, activation=activation_function, output_activation=output_activation_function)
+  nn.construct()
+
+
 
 #1. layers update function for weights and biases
 #2. backprop function
