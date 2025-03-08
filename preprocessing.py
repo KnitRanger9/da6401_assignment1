@@ -1,4 +1,4 @@
-import numpy as np
+from utils import *
 
 class OneHot():
     def __init__(self):
@@ -20,5 +20,9 @@ class OneHot():
         self.fit(labels, num_classes)
         return self.transform()
 
-def min_max_scale(x):
+class MinMax():
+    def __init__(self):
+        pass
     
+    def normalise(self, data):
+        return (data - np.min(data, axis=0)) / (np.max(data) - np.min(data, axis=0))
