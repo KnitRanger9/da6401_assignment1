@@ -1,23 +1,7 @@
 #Making NN from scratch: Day 1
-# !pip install wandb
+# !pip install 
 
-import numpy as np
-import pandas as pd
-from keras.datasets import fashion_mnist
-import wandb
-from tqdm import tqdm
-import matplotlib.pyplot as plt
-
-
-
-def visualize_data():
-  plt.figure(figsize=(10,10))
-  
-  for i in range(5):
-    plt.subplot(1,5,i+1)
-    plt.imshow(X_train[i], cmap="gray")
-    plt.title(f"Image {i+1}")
-  plt.show()
+from utils import *
 
 #Helper functions
 
@@ -173,15 +157,6 @@ class NeuralNetwork(Layer):
   def backward(self, target):
     delta_matrix=np.zeros(self.n_layers, dtype=np.float)
 
-
-  # def train(self, X, epochs=100):
-  #   input=X
-  #   for _ in range(epochs):
-  #     for i in range(self.n_layers):
-  #       w = self.weights[i]
-  #       b = self.bias[i]
-  #       y = np.dot(w.T, input) + b
-
 if __name__ == '__main__':
   # def __init__(self, n_layers, activation, output_activation):
 
@@ -192,6 +167,8 @@ if __name__ == '__main__':
   # Normalise
   X_train = X_train/255
   X_test = X_test/255
+
+  visualize_data(X_train)
 
   n_layers=int(input("Enter the number of layers in the neural network: "))
   activation=input("Enter the activation function for hidden layers (e.g., sigmoid, ReLU, tanh): ")
