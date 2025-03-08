@@ -4,4 +4,3 @@ matplotlib
 keras
 tqdm
 wandb
-scikit-learn

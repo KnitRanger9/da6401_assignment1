@@ -3,9 +3,10 @@
 
 from utils import *
 import visualise
-import argparse_1
+import config
 import preprocessing
 import losses
+import optim
 #Helper functions
 
 np.random.seed(1)
@@ -13,54 +14,14 @@ np.random.seed(1)
 wandb.init(config={"batch_size": 32, "l_rate": 0.001, "optimizer": 'nadam', "epochs": 5, "activation": "relu", "initializer": "random", "loss": "squared_error", "n_hlayers": 5, "hlayer_size": 128}, project="Deep-Learning")
 myconfig = wandb.config
 
-  #Optimizers
-def sgd(weights, bias, lr, grad_w, grad_b):
-  weights -= lr*grad_w
-  bias -= lr*grad_b
-  return weights, bias
-
-def momentum_gd(weights, bias, lr, grad_w, grad_b, beta, v_w, v_b):
-  v_w = beta*v_w + lr*grad_w
-  v_b = beta*v_b + lr*grad_b
-  weights -= v_w
-  bias -= v_b
-  return weights, bias, v_w, v_b
-
-def nest_acc_gd(weights, bias, lr, grad_w, grad_b, beta, v_w, v_b, gamma, v_w_prev, v_b_prev):
-  v_w = beta*v_w + lr*grad_w
-  v_b = beta*v_b + lr*grad_b
-  weights -= (gamma*v_w_prev + v_w)
-  bias -= (gamma*v_b_prev + v_b)
-  return weights, bias, v_w, v_b, v_w_prev, v_b_prev
-
-def rms_prop(weights, bias, lr, grad_w, grad_b, beta, v_w, v_b, epsilon):
-  v_w = beta*v_w + (1-beta)*(grad_w**2)
-  v_b = beta*v_b + (1-beta)*(grad_b**2)
-  weights -= lr*grad_w/(np.sqrt(v_w) + epsilon)
-  bias -= lr*grad_b/(np.sqrt(v_b) + epsilon)
-  return weights, bias, v_w, v_b
-
-def adam(weights, bias, lr, grad_w, grad_b, beta1, beta2, epsilon, m_w, m_b, v_w, v_b, t):
-  m_w = beta1*m_w + (1-beta1)*grad_w
-  m_b = beta1*m_b + (1-beta1)*grad_b
-  v_w = beta2*v_w + (1-beta2)*(grad_w**2)
-  v_b = beta2*v_b + (1-beta2)*(grad_b**2)
-  m_w_hat = m_w/(1-beta1**t)
-  m_b_hat = m_b/(1-beta1**t)
-  v_w_hat = v_w/(1-beta2**t)
-  v_b_hat = v_b/(1-beta2**t)
-  weights -= lr*m_w_hat/(np.sqrt(v_w_hat) + epsilon)
-  bias -= lr*m_b_hat/(np.sqrt(v_b_hat) + epsilon)
-  return weights, bias, m_w, m_b, v_w, v_b
-
-def nadam(weights, bias, lr, epsilon, beta1, beta2, v_w, v_b, m_w, m_b):
-  m_w_prev = beta1*m_w - (1-beta1)*grad_w
-  m_b_prev = beta1*m_b - (1-beta1)*grad_b
-  v_w_prev = beta2*v_w - (1-beta2)*grad_w**2
-  v_b_prev = beta2*v_b - (1-beta2)*grad_b**2
-  weights -= lr*(m_w_prev/(np.sqrt(v_w_prev) + epsilon) + beta1*(m_w - m_w_prev)/(np.sqrt(v_w) + epsilon))
-  bias -= lr*(m_b_prev/(np.sqrt(v_b_prev) + epsilon) + beta1*(m_b - m_b_prev)/(np.sqrt(v_b) + epsilon))
-
+def visualize_data(X_train):
+  plt.figure(figsize=(10,10))
+  
+  for i in range(5):
+    plt.subplot(1,5,i+1)
+    plt.imshow(X_train[i], cmap="gray")
+    plt.title(f"Image {i+1}")
+  plt.show()
 
 
 class Layer:
@@ -158,14 +119,6 @@ if __name__ == '__main__':
 
   n_layers=int(input("Enter the number of layers in the neural network: "))
   activation=input("Enter the activation function for hidden layers (e.g., sigmoid, ReLU, tanh): ")
-
-  match activation:
-    case "sigmoid":
-      activation_function=sigmoid()
-    case "relu":
-      activation_function=relu()
-    case "tanh":
-      activation_function=tanh()
 
   output_activation_function=softmax()
   # Create a Neural Network object with given number of layers, activation function and output activation function
