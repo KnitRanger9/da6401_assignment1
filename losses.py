@@ -1,14 +1,5 @@
 from utils import *
 
-class Sigmoid_loss:
-    def __init__(self):
-      pass
-    def loss(self, x):
-      return 1/(1+np.exp(-x))
-    
-    def differential(self, x):
-      return self.activate(x)*(1-self.activate(x))
-
 class MSE_loss:
   def __init__(self):
     pass

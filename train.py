@@ -2,17 +2,15 @@
 # !pip install 
 
 from utils import *
-import visualise
 import config
-import preprocessing
-import losses
-import optim
-#Helper functions
+from inits import NormalInit, XavierInit
+from preprocessing import MinMax, OneHot
+from activations import Sigmoid, ReLU, TanH, Softmax
+from  losses import MSE_loss, Cross_entropy_loss
+from optim import SGD, GDMomentum, GDNesterov, RMSProp, Adam, Nadam
 
-np.random.seed(1)
+np.random.seed(24)
 
-wandb.init(config={"batch_size": 32, "l_rate": 0.001, "optimizer": 'nadam', "epochs": 5, "activation": "relu", "initializer": "random", "loss": "squared_error", "n_hlayers": 5, "hlayer_size": 128}, project="Deep-Learning")
-myconfig = wandb.config
 
 def visualize_data(X_train):
   plt.figure(figsize=(10,10))
@@ -46,13 +44,6 @@ class Layer:
     self.neurons = np.zeros(self.n_output,1)
 
   # forward inside Layer??
-    
-  # def forward(self, inputs):
-  #   inputs = np.concatenate((inputs, np.ones((1,inputs.shape[1]))))
-  #   output = self.activation(np.dot(self.weights, inputs))
-  #   for i in range(self.n_output):
-  #     self.neurons[i] = output[i]
-  #   return output
 
 class NeuralNetwork(Layer):
   """
@@ -107,13 +98,16 @@ class NeuralNetwork(Layer):
 if __name__ == '__main__':
   # def __init__(self, n_layers, activation, output_activation):
 
-  run = wandb.init(project="fashion_mnist")
+  wandb.init(config={"batch_size": 32, "l_rate": 0.001, "optimizer": 'nadam', "epochs": 5, "activation": "relu", "initializer": "random", "loss": "squared_error", "n_hlayers": 5, "hlayer_size": 128}, project="Deep-Learning")
+  myconfig = wandb.config
 
   #Question1
   (X_train, X_test), (y_train, y_test) = fashion_mnist.load_data()
   # Normalise
   X_train = X_train/255
   X_test = X_test/255
+
+  X_train, X_val, y_train, y_val = train_test_split(X_train, y_train, test_size=0.2)
 
   visualize_data(X_train)
 
