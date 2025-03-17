@@ -1,15 +1,23 @@
 #Making NN from scratch: Day 1
 # !pip install 
 
-from utils import *
+from sklearn.model_selection import train_test_split
+from keras.datasets import fashion_mnist, mnist
+import numpy as np
+import matplotlib.pyplot as plt
+import os
+import argparse
+
+# from utils import *
 import config
-from inits import RandomInit, XavierInit
-from preprocessing import MinMax, OneHot
-from layers import A_x,Dense
-from new_nn import NeuralNetwork
-from activations import Sigmoid, ReLU, TanH, Softmax
-from  losses import MSE_loss, Cross_entropy_loss
-from optim import SGD, GDMomentum, GDNesterov, RMSProp, Adam, Nadam
+# from inits import RandomInit, XavierInit
+# from preprocessing import MinMax, OneHot
+# from layers import A_x,Dense
+from new_nn import *
+# from activations import Sigmoid, ReLU, TanH, Softmax
+from  losses import *
+from optim import *
+import wandb
 
 np.random.seed(24)
 
@@ -65,142 +73,73 @@ warnings.filterwarnings("ignore")
 
 x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, test_size=0.2)
 
-x_train = x_train.reshape(x_train.shape[0], -1).T
-x_val = x_val.reshape(x_val.shape[0], -1).T
-x_test = x_test.reshape(x_test.shape[0], -1).T
-
-scaler = MinMax()
-X_train = scaler.normalise(x_train)
-X_val = scaler.normalise(x_val)
-X_test = scaler.normalise(x_test)
-
-onehot = OneHot()
-y_train_encoded = onehot.fit_transform(y_train)
-y_val_encoded = onehot.fit_transform(y_val)
-y_test_encoded = onehot.fit_transform(y_test)
-
-print(f"Train data shape: {X_train.shape}")
-print(f"Validation data shape: {X_val.shape}")
-print(f"Test data shape: {X_test.shape}")
-
-y_train_encoded = np.array([img.flatten() for img in y_train_encoded]).T
-y_val_encoded = np.array([img.flatten() for img in y_val_encoded]).T
-y_test_encoded = np.array([img.flatten() for img in y_test_encoded]).T
-
-layers = [A_x(X_train),
-          Dense("Dense1", 64, "relu"),
-          Dense("Dense2", 32, "relu"),
-          Dense("Dense3", 16, "relu"),
-          Dense("Dense4", 10, "softmax", last=True)]
-
-# def __init__(self, layers, batch, num_epochs, optimizer, w_init, targets, loss_fn, validate=False, validation_inputs = None, val_target = None, optim_params = None, wandb_=False):
-model = NeuralNetwork(layers,
-                      batch=64,
-                      num_epochs=5,
-                      optimizer="RMSProp",
-                      w_init="XavierInit",
-                      targets=y_train_encoded,
-                      loss_fn="Cross_entropy_loss",
-                      validate=True,
-                      validation_inputs=X_val,
-                      val_target=y_val_encoded,
-                      optim_params={"lr":0.001})
-
-
-model.train(x_train, y_train_encoded, x_val, y_val_encoded)
-val_accuracy = model.calculate_accuracy(x_val, y_val_encoded)
-train_accuracy = model.calculate_accuracy(x_train, y_train_encoded)
-
-wandb.log({
-    "train_accuracy": train_accuracy,
-    "val_accuracy": val_accuracy,
-    "final_train_loss": model.history["train_loss"][-1],
-    "final_val_loss": model.history["val_loss"][-1]
-})
-
-sweep_config = {
-        'method': 'bayes',  # Use Bayesian optimization for efficient searching
-        'metric': {'name': 'val_accuracy', 'goal': 'maximize'},
-        'parameters': {
-            'epochs': {'values': [5, 10]},
-            'hidden_layers': {'values': [3, 4, 5]},
-            'hidden_size': {'values': [32, 64, 128]},
-            'weight_decay': {'values': [0, 0.0005, 0.5]},
-            'lr': {'values': [1e-3, 1e-4]},
-            'optimizer': {'values': ['sgd', 'momentum', 'nesterov', 'rmsprop', 'adam', 'nadam']},
-            'batch_size': {'values': [16, 32, 64]},
-            'weight_init': {'values': ['random', 'xavier']},
-            'activation': {'values': ['sigmoid', 'tanh', 'relu']}
-        }
-    }
-sweep_id = wandb.sweep(sweep_config, project="Deep-Learning", entity="da24m004-iitmaana")
-
-wandb.agent(sweep_id, model, count = 50)
-
-#Evaluate best model:
-api = wandb.Api()
-sweep = api.sweep(f"your-username/fashion-mnist-nn/{sweep_id}")
-best_run = sweep.best_run()
-best_config = best_run.config
-
-print(f"Best configuration found: {best_config}")
-
-# Train model with best hyperparameters
-hidden_layers = [best_config["hidden_size"]] * best_config["hidden_layers"]
-
-best_model = NeuralNetwork(
-    input_dim=784,
-    hidden_layers=hidden_layers,
-    activation=best_config["activation"],
-    weight_init=best_config["weight_init"],
-    optimizer=best_config["optimizer"],
-    learning_rate=best_config["lr"],
-    weight_decay=best_config["weight_decay"],
-    batch_size=best_config["batch_size"],
-    num_epochs=best_config["epochs"]
-)
-
-best_model.train(x_train, y_train_encoded, x_val, y_val_encoded)
-
-# Evaluate on test set
-test_accuracy = best_model.calculate_accuracy(x_test, y_test_encoded)
-print(f"Test accuracy with best model: {test_accuracy:.4f}")
-
-# Generate predictions
-y_pred = best_model.predict(x_test)
-
-# Plot confusion matrix
-cm = confusion_matrix(y_test, y_pred)
-plt.figure(figsize=(10, 8))
-sns.heatmap(cm, annot=True, fmt='d', cmap='Blues',
-            xticklabels=[class_dict[i] for i in range(10)],
-            yticklabels=[class_dict[i] for i in range(10)])
-plt.xlabel('Predicted')
-plt.ylabel('True')
-plt.title(f'Confusion Matrix - Test Accuracy: {test_accuracy:.4f}')
-plt.tight_layout()
-plt.savefig('confusion_matrix.png')
-wandb.log({"Confusion Matrix": wandb.Image('confusion_matrix.png')})
-
-# Display some sample predictions
-plt.figure(figsize=(15, 6))
-for i in range(10):
-    plt.subplot(2, 5, i+1)
-    sample_idx = np.random.randint(0, x_test.shape[0])
-    img = x_test[sample_idx]
-    plt.imshow(img, cmap='gray')
+def parse_args():
+    parser = argparse.ArgumentParser(description='Neural Network Training with Various Optimizers')
+    parser.add_argument('--tune', action='store_true', 
+                   help='Enable hyperparameter tuning mode')
+    parser.add_argument('-wp', '--wandb_project', type=str, default="neural-network-sweep",
+                        help='Project name used to track experiments in Weights & Biases dashboard')
+    parser.add_argument('-we', '--wandb_entity', type=str, default=None,
+                        help='Wandb Entity used to track experiments in the Weights & Biases dashboard.')
+    parser.add_argument('-d', '--dataset', type=str, default="fashion_mnist", choices=["mnist", "fashion_mnist"],
+                        help='Dataset to use for training and testing')
+    parser.add_argument('-e', '--epochs', type=int, default=1,
+                        help='Number of epochs to train neural network.')
+    parser.add_argument('-b', '--batch_size', type=int, default=4,
+                        help='Batch size used to train neural network.')
+    parser.add_argument('-l', '--loss', type=str, default="cross_entropy", choices=["mean_squared_error", "cross_entropy"],
+                        help='Loss function to use for training')
+    parser.add_argument('-o', '--optimizer', type=str, default="sgd", 
+                        choices=["sgd", "momentum", "nag", "rmsprop", "adam", "nadam"],
+                        help='Optimizer to use for training')
+    parser.add_argument('-lr', '--learning_rate', type=float, default=0.1,
+                        help='Learning rate used to optimize model parameters')
+    parser.add_argument('-m', '--momentum', type=float, default=0.5,
+                        help='Momentum used by momentum and nag optimizers.')
+    parser.add_argument('-beta', '--beta', type=float, default=0.5,
+                        help='Beta used by rmsprop optimizer')
+    parser.add_argument('-beta1', '--beta1', type=float, default=0.5,
+                        help='Beta1 used by adam and nadam optimizers.')
+    parser.add_argument('-beta2', '--beta2', type=float, default=0.5,
+                        help='Beta2 used by adam and nadam optimizers.')
+    parser.add_argument('-eps', '--epsilon', type=float, default=0.000001,
+                        help='Epsilon used by optimizers.')
+    parser.add_argument('-w_d', '--weight_decay', type=float, default=0.0,
+                        help='Weight decay used by optimizers.')
+    parser.add_argument('-w_i', '--weight_init', type=str, default="random", choices=["random", "xavier"],
+                        help='Weight initialization method')
+    parser.add_argument('-nhl', '--num_layers', type=int, default=1,
+                        help='Number of hidden layers used in feedforward neural network.')
+    parser.add_argument('-sz', '--hidden_size', type=int, default=4,
+                        help='Number of hidden neurons in a feedforward layer.')
+    parser.add_argument('-a', '--activation', type=str, default="sigmoid", 
+                        choices=["identity", "sigmoid", "tanh", "relu"],
+                        help='Activation function to use')
     
-    pred_class = class_dict[y_pred[sample_idx]]
-    true_class = class_dict[y_test[sample_idx]]
-    
-    if y_pred[sample_idx] == y_test[sample_idx]:
-        color = 'green'
-    else:
-        color = 'red'
+    return parser.parse_args()
+
+def log_examples():
+    wandb.init(project=WANDB_PROJECT, entity=wandb.api.api.default_entity)
+    # log one image of each class
+    (x_train, y_train), _ = fashion_mnist.load_data()
+    for i in range(10):
+        wandb.log({"Examples": [wandb.Image(x_train[y_train == i][0], caption=CLASS_NAMES[i])]})
+    # wandb.finish()
+
+def initialize_weights(self):
+    self.weights.append(np.random.randn(self.input_size, self.neurons))
+    for _ in range(self.hidden_layers - 1):
+        self.weights.append(np.random.randn(self.neurons, self.neurons))
+    self.weights.append(np.random.randn(self.neurons, self.output_size))
+
+    if self.weight_init == "xavier":
+        for i in range(len(self.weights)):
+            self.weights[i] = self.weights[i] * np.sqrt(1 / self.weights[i].shape[0])
+
+def initiate_biases(self):
+    for _ in range(self.hidden_layers):
+        self.biases.append(np.zeros(self.neurons))
+    self.biases.append(np.zeros(self.output_size))
+
+
         
-    plt.title(f"Pred: {pred_class}\nTrue: {true_class}", color=color)
-    plt.axis('off')
-
-plt.tight_layout()
-plt.savefig('sample_predictions.png')
-wandb.log({"Sample Predictions": wandb.Image('sample_predictions.png')})
