@@ -1,85 +1,61 @@
 import os
 import numpy as np
+import argparse
 from sklearn.model_selection import train_test_split
 from keras.datasets import fashion_mnist, mnist
 import wandb
 
 CLASS_NAMES = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
-WANDB_PROJECT = "neural-network-sweep"
-DATASET = "fashion_mnist"
-EPOCHS = 10
+def parse_args():
+    parser = argparse.ArgumentParser(description='Neural Network Training with Various Optimizers')
+    parser.add_argument('-s', '--sweep', action='store_true',
+                       help='Run hyperparameter sweep with wandb')
+    parser.add_argument('-sc', '--sweep_count', type=int, default=100,
+                        help='Number of runs to execute during the sweep')
+    parser.add_argument('-wp', '--wandb_project', type=str, default="neural-network-sweep",
+                        help='Project name used to track experiments in Weights & Biases dashboard')
+    parser.add_argument('-we', '--wandb_entity', type=str, default=None,
+                        help='Wandb Entity used to track experiments in the Weights & Biases dashboard.')
+    parser.add_argument('-d', '--dataset', type=str, default="fashion_mnist", choices=["mnist", "fashion_mnist"],
+                        help='Dataset to use for training and testing')
+    parser.add_argument('-e', '--epochs', type=int, default=1,
+                        help='Number of epochs to train neural network.')
+    parser.add_argument('-b', '--batch_size', type=int, default=4,
+                        help='Batch size used to train neural network.')
+    parser.add_argument('-l', '--loss', type=str, default="cross_entropy", choices=["mean_squared_error", "cross_entropy"],
+                        help='Loss function to use for training')
+    parser.add_argument('-o', '--optimizer', type=str, default="sgd", 
+                        choices=["sgd", "momentum", "nag", "rmsprop", "adam", "nadam"],
+                        help='Optimizer to use for training')
+    parser.add_argument('-lr', '--learning_rate', type=float, default=0.1,
+                        help='Learning rate used to optimize model parameters')
+    parser.add_argument('-m', '--momentum', type=float, default=0.5,
+                        help='Momentum used by momentum and nag optimizers.')
+    parser.add_argument('-beta', '--beta', type=float, default=0.5,
+                        help='Beta used by rmsprop optimizer')
+    parser.add_argument('-beta1', '--beta1', type=float, default=0.5,
+                        help='Beta1 used by adam and nadam optimizers.')
+    parser.add_argument('-beta2', '--beta2', type=float, default=0.5,
+                        help='Beta2 used by adam and nadam optimizers.')
+    parser.add_argument('-eps', '--epsilon', type=float, default=0.000001,
+                        help='Epsilon used by optimizers.')
+    parser.add_argument('-w_d', '--weight_decay', type=float, default=0.0,
+                        help='Weight decay used by optimizers.')
+    parser.add_argument('-w_i', '--weight_init', type=str, default="random", choices=["random", "xavier"],
+                        help='Weight initialization method')
+    parser.add_argument('-nhl', '--num_layers', type=int, default=1,
+                        help='Number of hidden layers used in feedforward neural network.')
+    parser.add_argument('-sz', '--hidden_size', type=int, default=4,
+                        help='Number of hidden neurons in a feedforward layer.')
+    parser.add_argument('-a', '--activation', type=str, default="sigmoid", 
+                        choices=["identity", "sigmoid", "tanh", "relu"],
+                        help='Activation function to use')
+    
+    return parser.parse_args()
 
-sweep_configuration = {
-        'method': 'random',
-        'name': 'sweep',
-        'metric': {
-            'goal': 'maximize',
-            'name': 'val_accuracy'
-        },
-        'parameters': {
-            'batch_size': {
-                'values': [16, 32, 64, 128]
-            },
-            'learning_rate': {
-                'values': [0.0001, 0.0005, 0.001, 0.005, 0.01, 0.05, 0.1]
-            },
-            'neurons': {
-                'values': [16, 32, 64, 128]
-            },
-            'hidden_layers': {
-                'values': [1, 2, 3, 4]
-            },
-            'activation': {
-                'values': ['relu', 'tanh', 'sigmoid', 'identity']
-            },
-            'weight_init': {
-                'values': ['xavier', 'random']
-            },
-            'optimizer': {
-                'values': ['sgd', 'momentum', 'nag', 'rmsprop', 'adam', 'nadam']
-            },
-            'momentum': {
-                'values': [0.7, 0.8, 0.9]
-            },
-            'input_size': {
-                'value': 784
-            },
-            'output_size': {
-                'value': 10
-            },
-            'loss': {
-                'value': 'cross_entropy'
-            },
-            'epochs': {
-                'value': 10
-            },
-            'beta': {
-                'value': 0.9
-            },
-            'beta1': {
-                'value': 0.9
-            },
-            'beta2': {
-                'value': 0.999
-            },
-            'output_activation': {
-                'value': 'softmax'
-            },
-            'epsilon': {
-                'value': 1e-8
-            },
-            'decay': {
-                'values': [0, 0.0005, 0.005]
-            },
-            'dataset': {
-                'value': 'fashion_mnist'
-            }
-        }
-    }
-
-def log_examples():
-    wandb.init(project=WANDB_PROJECT, entity=wandb.api.default_entity)  # Fixed entity attribute
+def log_examples(wandb_project, wandb_entity):
+    wandb.init(project=wandb_project, entity=wandb_entity)
     # log one image of each class
     (x_train, y_train), _ = fashion_mnist.load_data()
     for i in range(10):
@@ -158,11 +134,9 @@ class FFNeuralNetwork():
 
 def loss(loss_type, y, y_pred):
     if loss_type == "cross_entropy": # Cross Entropy
-        # Add small epsilon to prevent log(0)
-        y_pred = np.clip(y_pred, 1e-10, 1.0)
-        return -np.sum(y * np.log(y_pred)) / y.shape[0]
+        return -np.sum(y * np.log(y_pred))
     elif loss_type == "mean_squared_error": # Mean Squared Error
-        return np.sum((y - y_pred) ** 2) / (2 * y.shape[0])
+        return np.sum((y - y_pred) ** 2) / 2
     else:
         raise Exception("Invalid loss function")
 
@@ -176,8 +150,6 @@ class Backpropagation():
 
     def loss_derivative(self, y, y_pred):
         if self.loss == "cross_entropy":
-            # Add small epsilon to prevent division by zero
-            y_pred = np.clip(y_pred, 1e-10, 1.0)
             return -y / y_pred
         elif self.loss == "mean_squared_error":
             return (y_pred - y)
@@ -197,53 +169,37 @@ class Backpropagation():
         else:
             raise Exception("Invalid activation function")
 
-    def output_activation_derivative(self, y_true, y_pred):
-        # For softmax + cross-entropy, the derivative simplifies
-        if self.nn.output_activation_function == "softmax" and self.loss == "cross_entropy":
-            return y_pred - y_true
-        # For other combinations, we need the full Jacobian
-        elif self.nn.output_activation_function == "softmax":
-            m = y_pred.shape[0]
-            jacobians = np.zeros((m, y_pred.shape[1], y_pred.shape[1]))
-            for i in range(m):
-                for j in range(y_pred.shape[1]):
-                    for k in range(y_pred.shape[1]):
-                        if j == k:
-                            jacobians[i, j, k] = y_pred[i, j] * (1 - y_pred[i, j])
-                        else:
-                            jacobians[i, j, k] = -y_pred[i, j] * y_pred[i, k]
-            return jacobians
+    def output_activation_derivative(self, y, y_pred):
+        if self.nn.output_activation_function == "softmax":
+            # derivative of softmax is a matrix
+            return np.diag(y_pred) - np.outer(y_pred, y_pred)
         else:
             raise Exception("Invalid output activation function")
 
     def backward(self, y, y_pred):
         self.d_weights, self.d_biases = [], []
-        m = y.shape[0]  # batch size
+        self.d_h, self.d_a = [], []
 
-        # For softmax + cross-entropy, the gradient simplifies
-        if self.nn.output_activation_function == "softmax" and self.loss == "cross_entropy":
-            delta = (y_pred - y) / m
-        else:
-            # General case (not efficient for large networks)
-            delta = np.zeros_like(y_pred)
-            for i in range(m):
-                loss_grad = self.loss_derivative(y[i], y_pred[i])
-                act_jacobian = self.output_activation_derivative(y[i], y_pred[i])
-                if len(act_jacobian.shape) == 2:  # It's a Jacobian matrix
-                    delta[i] = np.dot(loss_grad, act_jacobian)
-                else:  # It's already the combined gradient
-                    delta[i] = loss_grad * act_jacobian
-            delta /= m
+        self.d_h.append(self.loss_derivative(y, y_pred))
+        output_derivative_matrix = []
+        for i in range(y_pred.shape[0]):
+            output_derivative_matrix.append(np.matmul(self.loss_derivative(y[i], y_pred[i]), self.output_activation_derivative(y[i], y_pred[i])))
+        self.d_a.append(np.array(output_derivative_matrix))
 
-        # Output layer gradients
-        self.d_weights.insert(0, np.dot(self.nn.post_activation[-2].T, delta))
-        self.d_biases.insert(0, np.sum(delta, axis=0))
+        for i in range(self.nn.hidden_layers, 0, -1):
+            self.d_weights.append(np.matmul(self.nn.post_activation[i].T, self.d_a[-1]))
+            self.d_biases.append(np.sum(self.d_a[-1], axis=0))
+            self.d_h.append(np.matmul(self.d_a[-1], self.nn.weights[i].T))
+            self.d_a.append(self.d_h[-1] * self.activation_derivative(self.nn.post_activation[i]))
 
-        # Hidden layers
-        for l in range(self.nn.hidden_layers - 1, -1, -1):
-            delta = np.dot(delta, self.nn.weights[l+1].T) * self.activation_derivative(self.nn.post_activation[l+1])
-            self.d_weights.insert(0, np.dot(self.nn.post_activation[l].T, delta))
-            self.d_biases.insert(0, np.sum(delta, axis=0))
+        self.d_weights.append(np.matmul(self.nn.post_activation[0].T, self.d_a[-1]))
+        self.d_biases.append(np.sum(self.d_a[-1], axis=0))
+
+        self.d_weights.reverse()
+        self.d_biases.reverse()
+        for i in range(len(self.d_weights)):
+            self.d_weights[i] = self.d_weights[i] / y.shape[0]
+            self.d_biases[i] = self.d_biases[i] / y.shape[0]
 
         return self.d_weights, self.d_biases
 
@@ -323,14 +279,14 @@ class Optimizer():
             self.h_weights[i] = self.beta2 * self.h_weights[i] + (1 - self.beta2) * d_weights[i]**2
             self.h_biases[i] = self.beta2 * self.h_biases[i] + (1 - self.beta2) * d_biases[i]**2
 
-            hm_weights_hat = self.hm_weights[i] / (1 - self.beta1**(self.t + 1))
-            hm_biases_hat = self.hm_biases[i] / (1 - self.beta1**(self.t + 1))
+            self.hm_weights_hat = self.hm_weights[i] / (1 - self.beta1**(self.t + 1))
+            self.hm_biases_hat = self.hm_biases[i] / (1 - self.beta1**(self.t + 1))
 
-            h_weights_hat = self.h_weights[i] / (1 - self.beta2**(self.t + 1))
-            h_biases_hat = self.h_biases[i] / (1 - self.beta2**(self.t + 1))
+            self.h_weights_hat = self.h_weights[i] / (1 - self.beta2**(self.t + 1))
+            self.h_biases_hat = self.h_biases[i] / (1 - self.beta2**(self.t + 1))
 
-            self.nn.weights[i] -= self.lr * (hm_weights_hat / ((np.sqrt(h_weights_hat)) + self.epsilon)) + self.decay * self.nn.weights[i] * self.lr
-            self.nn.biases[i] -= self.lr * (hm_biases_hat / ((np.sqrt(h_biases_hat)) + self.epsilon)) + self.decay * self.nn.biases[i] * self.lr
+            self.nn.weights[i] -= self.lr * (self.hm_weights_hat / ((np.sqrt(self.h_weights_hat)) + self.epsilon)) + self.decay * self.nn.weights[i] * self.lr
+            self.nn.biases[i] -= self.lr * (self.hm_biases_hat / ((np.sqrt(self.h_biases_hat)) + self.epsilon)) + self.decay * self.nn.biases[i] * self.lr
 
     def NAdam(self, d_weights, d_biases):
         for i in range(self.nn.hidden_layers + 1):
@@ -340,19 +296,19 @@ class Optimizer():
             self.h_weights[i] = self.beta2 * self.h_weights[i] + (1 - self.beta2) * d_weights[i]**2
             self.h_biases[i] = self.beta2 * self.h_biases[i] + (1 - self.beta2) * d_biases[i]**2
 
-            hm_weights_hat = self.hm_weights[i] / (1 - self.beta1 ** (self.t + 1))
-            hm_biases_hat = self.hm_biases[i] / (1 - self.beta1 ** (self.t + 1))
+            self.hm_weights_hat = self.hm_weights[i] / (1 - self.beta1 ** (self.t + 1))
+            self.hm_biases_hat = self.hm_biases[i] / (1 - self.beta1 ** (self.t + 1))
 
-            h_weights_hat = self.h_weights[i] / (1 - self.beta2 ** (self.t + 1))
-            h_biases_hat = self.h_biases[i] / (1 - self.beta2 ** (self.t + 1))
+            self.h_weights_hat = self.h_weights[i] / (1 - self.beta2 ** (self.t + 1))
+            self.h_biases_hat = self.h_biases[i] / (1 - self.beta2 ** (self.t + 1))
 
-            temp_update_w = self.beta1 * hm_weights_hat + ((1 - self.beta1) / (1 - self.beta1 ** (self.t + 1))) * d_weights[i]
-            temp_update_b = self.beta1 * hm_biases_hat + ((1 - self.beta1) / (1 - self.beta1 ** (self.t + 1))) * d_biases[i]
+            temp_update_w = self.beta1 * self.hm_weights_hat + ((1 - self.beta1) / (1 - self.beta1 ** (self.t + 1))) * d_weights[i]
+            temp_update_b = self.beta1 * self.hm_biases_hat + ((1 - self.beta1) / (1 - self.beta1 ** (self.t + 1))) * d_biases[i]
 
-            self.nn.weights[i] -= self.lr * (temp_update_w / ((np.sqrt(h_weights_hat)) + self.epsilon)) + self.decay * self.nn.weights[i] * self.lr
-            self.nn.biases[i] -= self.lr * (temp_update_b / ((np.sqrt(h_biases_hat)) + self.epsilon)) + self.decay * self.nn.biases[i] * self.lr
+            self.nn.weights[i] -= self.lr * (temp_update_w / ((np.sqrt(self.h_weights_hat)) + self.epsilon)) + self.decay * self.nn.weights[i] * self.lr
+            self.nn.biases[i] -= self.lr * (temp_update_b / ((np.sqrt(self.h_biases_hat)) + self.epsilon)) + self.decay * self.nn.biases[i] * self.lr
 
-def load_data(type, dataset=DATASET):
+def load_data(type, dataset='fashion_mnist'):
     x, y, x_test, y_test = None, None, None, None
 
     if dataset == 'mnist':
@@ -368,6 +324,147 @@ def load_data(type, dataset=DATASET):
         x_test = x_test.reshape(x_test.shape[0], 784) / 255
         y_test = np.eye(10)[y_test]
         return x_test, y_test
+
+def train(args):
+    x_train, y_train = load_data('train', dataset=args.dataset)
+    best_accuracy = 0
+    best_epoch = 0
+    best_model_weights = None
+    best_model_biases = None
+
+    nn = FFNeuralNetwork(input_size=784,
+                         hid_layers=args.num_layers,
+                         neurons=args.hidden_size,
+                         output_size=10,
+                         act_func=args.activation,
+                         out_act_func="softmax",
+                         weight_init=args.weight_init)
+    bp = Backpropagation(nn=nn,
+                         loss=args.loss,
+                         act_func=args.activation)
+    opt = Optimizer(nn=nn,
+                    bp=bp,
+                    lr=args.learning_rate,
+                    optimizer=args.optimizer,
+                    momentum=args.momentum,
+                    epsilon=args.epsilon,
+                    beta=args.beta,
+                    beta1=args.beta1,
+                    beta2=args.beta2,
+                    decay=args.weight_decay)
+
+    batch_size = args.batch_size
+    x_train_act, x_val, y_train_act, y_val = train_test_split(x_train, y_train, test_size=0.1)
+
+    print("Initial Accuracy: {}".format(np.sum(np.argmax(nn.forward(x_train), axis=1) == np.argmax(y_train, axis=1)) / y_train.shape[0]))
+
+    for epoch in range(args.epochs):
+        for i in range(0, x_train_act.shape[0], batch_size):
+            x_batch = x_train_act[i:i+batch_size]
+            y_batch = y_train_act[i:i+batch_size]
+
+            y_pred = nn.forward(x_batch)
+            d_weights, d_biases = bp.backward(y_batch, y_pred)
+            opt.run(d_weights, d_biases)
+
+        opt.t += 1
+
+        y_pred = nn.forward(x_train_act)
+        train_loss = loss(args.loss, y_train_act, y_pred)
+        train_accuracy = np.sum(np.argmax(y_pred, axis=1) == np.argmax(y_train_act, axis=1)) / y_train_act.shape[0]
+        val_loss = loss(args.loss, y_val, nn.forward(x_val))
+        val_accuracy = np.sum(np.argmax(nn.forward(x_val), axis=1) == np.argmax(y_val, axis=1)) / y_val.shape[0]
+        
+        print(f"Epoch: {epoch + 1}, Train Loss: {train_loss}, Train Accuracy: {train_accuracy}")
+        print(f"Validation Loss: {val_loss}, Validation Accuracy: {val_accuracy}")
+
+        if train_accuracy > best_accuracy:
+            best_accuracy = train_accuracy
+            best_epoch = epoch + 1
+            # Save weights and biases
+            best_model_weights = [w.copy() for w in nn.weights]
+            best_model_biases = [b.copy() for b in nn.biases]
+
+    x_test, y_test = load_data('test', dataset=args.dataset)
+    y_pred_test = nn.forward(x_test)
+    test_accuracy = np.sum(np.argmax(y_pred_test, axis=1) == np.argmax(y_test, axis=1)) / y_test.shape[0]
+    
+    # Compute and print confusion matrix
+    conf_matrix = compute_confusion_matrix(y_test, y_pred_test)
+    print(f"Confusion Matrix (Best Model, Training Accuracy: {best_accuracy}):")
+    print(conf_matrix)
+    
+    print(f"Test Accuracy: {test_accuracy}")
+
+    return nn
+
+sweep_configuration = {
+    'method': 'random',
+    'name': 'sweep',
+    'metric': {
+        'goal': 'maximize',
+        'name': 'val_accuracy'
+    },
+    'parameters': {
+        'batch_size': {
+            'values': [16, 32, 64, 128]
+        },
+        'learning_rate': {
+            'values': [0.0001, 0.0005, 0.001, 0.005, 0.01, 0.05, 0.1]
+        },
+        'neurons': {
+            'values': [16, 32, 64, 128]
+        },
+        'hidden_layers': {
+            'values': [1, 2, 3, 4]
+        },
+        'activation': {
+            'values': ['relu', 'tanh', 'sigmoid', 'identity']
+        },
+        'weight_init': {
+            'values': ['xavier', 'random']
+        },
+        'optimizer': {
+            'values': ['sgd', 'momentum', 'nag', 'rmsprop', 'adam', 'nadam']
+        },
+        'momentum': {
+            'values': [0.7, 0.8, 0.9]
+        },
+        'input_size': {
+            'value': 784
+        },
+        'output_size': {
+            'value': 10
+        },
+        'loss': {
+            'value': 'cross_entropy'
+        },
+        'epochs': {
+            'value': 10
+        },
+        'beta': {
+            'value': 0.9
+        },
+        'beta1': {
+            'value': 0.9
+        },
+        'beta2': {
+            'value': 0.999
+        },
+        'output_activation': {
+            'value': 'softmax'
+        },
+        'epsilon': {
+            'value': 1e-8
+        },
+        'decay': {
+            'values': [0, 0.0005, 0.005]
+        },
+        'dataset': {
+            'value': 'fashion_mnist'
+        }
+    }
+}
 
 def compute_confusion_matrix(y_true, y_pred, num_classes=10):
     """
@@ -395,83 +492,6 @@ def compute_confusion_matrix(y_true, y_pred, num_classes=10):
         conf_matrix[y_true[i], y_pred[i]] += 1
     
     return conf_matrix
-
-def train(parameters):
-    x_train, y_train = load_data('train', dataset=parameters['dataset'])
-    best_accuracy = 0
-    best_epoch = 0
-    best_model_weights = None
-    best_model_biases = None
-
-    nn = FFNeuralNetwork(input_size=parameters['input_size'],
-                         hid_layers=parameters['hidden_layers'],
-                         neurons=parameters['neurons'],
-                         output_size=parameters['output_size'],
-                         act_func=parameters['activation'],
-                         out_act_func=parameters['output_activation'],
-                         weight_init=parameters['weight_init'])
-    bp = Backpropagation(nn=nn,
-                         loss=parameters['loss'],
-                         act_func=parameters['activation'])
-    opt = Optimizer(nn=nn,
-                    bp=bp,
-                    lr=parameters['learning_rate'],
-                    optimizer=parameters['optimizer'],
-                    momentum=parameters['momentum'],
-                    epsilon=parameters['epsilon'],
-                    beta=parameters['beta'],
-                    beta1=parameters['beta1'],
-                    beta2=parameters['beta2'],
-                    decay=parameters['decay'])
-
-    batch_size = parameters['batch_size']
-    x_train_act, x_val, y_train_act, y_val = train_test_split(x_train, y_train, test_size=0.1)
-
-    print("Initial Accuracy: {}".format(np.sum(np.argmax(nn.forward(x_train), axis=1) == np.argmax(y_train, axis=1)) / y_train.shape[0]))
-
-    for epoch in range(parameters['epochs']):
-        for i in range(0, x_train_act.shape[0], batch_size):
-            x_batch = x_train_act[i:i+batch_size]
-            y_batch = y_train_act[i:i+batch_size]
-
-            y_pred = nn.forward(x_batch)
-            d_weights, d_biases = bp.backward(y_batch, y_pred)
-            opt.run(d_weights, d_biases)
-
-        opt.t += 1
-
-        y_pred = nn.forward(x_train_act)
-        train_loss = loss(parameters['loss'], y_train_act, y_pred)
-        train_accuracy = np.sum(np.argmax(y_pred, axis=1) == np.argmax(y_train_act, axis=1)) / y_train_act.shape[0]
-        val_pred = nn.forward(x_val)
-        val_loss = loss(parameters['loss'], y_val, val_pred)
-        val_accuracy = np.sum(np.argmax(val_pred, axis=1) == np.argmax(y_val, axis=1)) / y_val.shape[0]
-        
-        print(f"Epoch: {epoch + 1}, Train Loss: {train_loss}, Train Accuracy: {train_accuracy}")
-        print(f"Validation Loss: {val_loss}, Validation Accuracy: {val_accuracy}")
-
-        if train_accuracy > best_accuracy:
-            best_accuracy = train_accuracy
-            best_epoch = epoch + 1
-            # Save weights and biases
-            best_model_weights = [w.copy() for w in nn.weights]
-            best_model_biases = [b.copy() for b in nn.biases]
-
-    if best_model_weights is not None and best_model_biases is not None:
-        print(f"Restoring best model from epoch {best_epoch} with training accuracy {best_accuracy}")
-        nn.weights = best_model_weights
-        nn.biases = best_model_biases
-
-    x_test, y_test = load_data('test', dataset=parameters['dataset'])
-    y_pred_test = nn.forward(x_test)
-    test_accuracy = np.sum(np.argmax(y_pred_test, axis=1) == np.argmax(y_test, axis=1)) / y_test.shape[0]
-
-    # conf_matrix = compute_confusion_matrix(y_test, y_pred_test)
-    # print("Confusion Matrix:")
-    # print(conf_matrix)
-    print(f"Test Accuracy: {test_accuracy}")
-
-    return nn
 
 def train_sweep():
     run = wandb.init()
@@ -507,13 +527,9 @@ def train_sweep():
     x_train_act, x_val, y_train_act, y_val = train_test_split(x_train, y_train, test_size=0.1, random_state=42)
 
     print("Initial Accuracy: {}".format(np.sum(np.argmax(nn.forward(x_train), axis=1) == np.argmax(y_train, axis=1)) / y_train.shape[0]))
+    
 
     for epoch in range(parameters['epochs']):
-        # Shuffle training data for each epoch
-        indices = np.random.permutation(len(x_train_act))
-        x_train_act = x_train_act[indices]
-        y_train_act = y_train_act[indices]
-        
         for i in range(0, x_train_act.shape[0], batch_size):
             x_batch = x_train_act[i:i+batch_size]
             y_batch = y_train_act[i:i+batch_size]
@@ -543,22 +559,22 @@ def train_sweep():
             "val_accuracy": val_accuracy
         })
 
-        if val_accuracy > best_accuracy:  # Changed to use validation accuracy instead of training accuracy
-            best_accuracy = val_accuracy
-            best_params = parameters  # Create a copy of parameters
-            # Create a deep copy of the neural network
-            best_nn = FFNeuralNetwork(
-                neurons=nn.neurons,
-                hid_layers=nn.hidden_layers,
-                input_size=nn.input_size,
-                output_size=nn.output_size,
-                act_func=nn.activation_function,
-                weight_init=nn.weight_init,
-                out_act_func=nn.output_activation_function,
-                init_toggle=False
-            )
-            best_nn.weights = [w.copy() for w in nn.weights]
-            best_nn.biases = [b.copy() for b in nn.biases]
+    if train_accuracy > best_accuracy:
+        best_accuracy = train_accuracy
+        best_params = parameters.copy()
+        # Create a deep copy of the neural network
+        best_nn = FFNeuralNetwork(
+            neurons=nn.neurons,
+            hid_layers=nn.hidden_layers,
+            input_size=nn.input_size,
+            output_size=nn.output_size,
+            act_func=nn.activation_function,
+            weight_init=nn.weight_init,
+            out_act_func=nn.output_activation_function,
+            init_toggle=False
+        )
+        best_nn.weights = [w.copy() for w in nn.weights]
+        best_nn.biases = [b.copy() for b in nn.biases]
 
     # After training is complete, log confusion matrix
     x_test, y_test = load_data('test', dataset=parameters['dataset'])
@@ -567,100 +583,94 @@ def train_sweep():
     
     print(f"Test Accuracy: {test_accuracy}")
     wandb.log({"test_accuracy": test_accuracy})
+
     if best_nn is not None:
         best_y_pred = best_nn.forward(x_test)
         best_test_accuracy = np.sum(np.argmax(best_y_pred, axis=1) == np.argmax(y_test, axis=1)) / y_test.shape[0]
-        wandb.run.summary.update({
-            "best_activation": best_params['activation'],
-            "best_neurons": best_params['neurons'],
-            "best_hidden_layers": best_params['hidden_layers'],
-            "best_learning_rate": best_params['learning_rate'],
-            "best_batch_size": best_params['batch_size'],
-            "best_optimizer": best_params['optimizer'],
-            "best_momentum": best_params['momentum'],
-            "best_weight_init": best_params['weight_init'],
-            "best_val_accuracy": best_accuracy,
-            "best_test_accuracy": best_test_accuracy
-        })
-
         conf_matrix = compute_confusion_matrix(y_test, best_y_pred)
-
-        print("Best Parameters (Based on Validation Accuracy):")
+        
+        print("Best Parameters (Based on Training Accuracy):")
         for key, value in best_params.items():
             if key in ['input_size', 'output_size', 'loss', 'epochs', 'output_activation', 'dataset']:
                 continue
             print(f"  {key}: {value}")
-        print(f"Best Validation Accuracy: {best_accuracy}")
+        print(f"Best Training Accuracy: {best_accuracy}")
         print(f"Test Accuracy with Best Parameters: {best_test_accuracy}")
         print("Confusion Matrix (Best Parameters):")
         print(conf_matrix)
-
-        wandb.log({
-            "confusion_matrix": wandb.plot.confusion_matrix(
-                probs=None, 
-                y_true=np.argmax(y_test, axis=1), 
-                preds=np.argmax(best_y_pred, axis=1), 
-                class_names=CLASS_NAMES
-            )
+        wandb.log({'conf_mat': wandb.plot.confusion_matrix(
+            probs=None, 
+            y_true=np.argmax(y_test, axis=1), 
+            preds=np.argmax(y_pred_test, axis=1), 
+            class_names=CLASS_NAMES)
         })
 
-    return best_params, best_nn
+    return nn
 
-def run_sweep(sweep_conf=sweep_configuration):
+def run_single_sweep(args):
     print("Logging into W&B...")
     wandb.login()
     
     print("Starting sweep...")
-    sweep_id = wandb.sweep(sweep_conf, project=WANDB_PROJECT)
+    # Update sweep config with command line args
+    update_sweep_config(sweep_configuration, args)
+    
+    sweep_id = wandb.sweep(sweep_configuration, project=args.wandb_project, entity=args.wandb_entity)
     
     print(f"Sweep ID: {sweep_id}")
     print("Running sweep agent...")
     wandb.agent(sweep_id, function=train_sweep, count=100)
-    # api = wandb.Api()
-    # sweep = api.sweep(f"your-username/your-project-name/{sweep_id}")
-    # best_run = sweep.best_run()
-
-    best_params = {
-        'activation': wandb.run.summary['best_activation'],
-        'neurons': wandb.run.summary['best_neurons'],
-        'hidden_layers': wandb.run.summary['best_hidden_layers'],
-        'learning_rate': wandb.run.summary['best_learning_rate'],
-        'batch_size': wandb.run.summary['best_batch_size'],
-        'optimizer': wandb.run.summary['best_optimizer'],
-        'momentum': wandb.run.summary['best_momentum'],
-        'weight_init': wandb.run.summary['best_weight_init'],
-        # Add other parameters as needed
-    }
-
-    x_test, y_test = load_data('test', dataset=fashion_mnist)
-
-    best_model = FFNeuralNetwork(
-        input_size=sweep_configuration['input_size'],
-        hid_layers=best_params['hidden_layers'],
-        neurons=best_params['neurons'],
-        output_size=sweep_configuration['output_size'],
-        act_func=best_params['activation'],
-        out_act_func='softmax',  # Adjust as needed
-        weight_init=best_params['weight_init']
-    )
-
-    # wandb.init(project="your-project-name", name="final_best_model")
-    y_pred = best_model.forward(x_test)
-
-    wandb.plot.confusion_matrix(
-        probs=None, 
-        y_true=np.argmax(y_test, axis=1), 
-        preds=np.argmax(y_pred, axis=1), 
-        class_names=CLASS_NAMES
-    )
     
     print("Sweep completed!")
 
-if __name__ == "__main__":
-    log_examples()
+def update_sweep_config(config, args):
+    """Update sweep config with command line args"""
+    config['parameters']['dataset']['value'] = args.dataset
+    config['parameters']['epochs']['value'] = args.epochs
+    config['parameters']['batch_size']['values'] = [args.batch_size]
+    config['parameters']['loss']['value'] = args.loss
+    config['parameters']['optimizer']['values'] = [args.optimizer]
+    config['parameters']['learning_rate']['values'] = [args.learning_rate]
+    config['parameters']['momentum']['values'] = [args.momentum]
+    config['parameters']['beta']['value'] = args.beta
+    config['parameters']['beta1']['value'] = args.beta1
+    config['parameters']['beta2']['value'] = args.beta2
+    config['parameters']['epsilon']['value'] = args.epsilon
+    config['parameters']['decay']['values'] = [args.weight_decay]
+    config['parameters']['weight_init']['values'] = [args.weight_init.lower()]
+    config['parameters']['hidden_layers']['values'] = [args.num_layers]
+    config['parameters']['neurons']['values'] = [args.hidden_size]
     
-    run_sweep(sweep_configuration)
-    sweep_configuration['parameters']['loss']['value'] = 'mean_squared_error'
-    run_sweep(sweep_configuration)
-    # sweep_configuration['parameters']['dataset']['value'] = 'mnist'
-    # run_sweep(sweep_configuration)
+    return config
+
+# Adding the main execution block
+if __name__ == "__main__":
+    args = parse_args()
+    
+    if args.wandb_project:
+        # If running with wandb integration
+        if args.sweep:
+            try:
+                # Try to log example images once
+                log_examples(args.wandb_project, args.wandb_entity)
+                # Run hyperparameter sweep
+                run_single_sweep(args)
+            except Exception as e:
+                print(f"Error running wandb sweep: {e}")
+                print("Falling back to regular training...")
+                train(args)
+        else:
+            # Regular training with wandb
+            wandb.init(project=args.wandb_project, entity=args.wandb_entity)
+            nn = train(args)
+            wandb.finish()
+
+    else:
+        # Regular training without wandb
+        nn = train(args)
+        
+        # Evaluate on test set
+        x_test, y_test = load_data('test', dataset=args.dataset)
+        y_pred = nn.forward(x_test)
+        test_accuracy = np.sum(np.argmax(y_pred, axis=1) == np.argmax(y_test, axis=1)) / y_test.shape[0]
+        print(f"Test Accuracy: {test_accuracy}")

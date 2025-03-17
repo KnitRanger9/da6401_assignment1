@@ -1,0 +1,59 @@
+Initial Accuracy: 0.1065
+Epoch: 1, Loss: 2.304800024928172
+Train Accuracy: 0.0997962962962963
+Validation Accuracy: 0.10183333333333333
+Epoch: 2, Loss: 2.303869566693508
+Train Accuracy: 0.10018518518518518
+Validation Accuracy: 0.09833333333333333
+Epoch: 3, Loss: 2.3040310999176787
+Train Accuracy: 0.10092592592592593
+Validation Accuracy: 0.09166666666666666
+Epoch: 4, Loss: 2.3040173848218473
+Train Accuracy: 0.09985185185185186
+Validation Accuracy: 0.10133333333333333
+Epoch: 5, Loss: 2.3038953122474504
+Train Accuracy: 0.10018518518518518
+Validation Accuracy: 0.09833333333333333
+Epoch: 6, Loss: 2.3046341561097834
+Train Accuracy: 0.10018518518518518
+Validation Accuracy: 0.09833333333333333
+Epoch: 7, Loss: 2.3038185764832058
+Train Accuracy: 0.0995
+Validation Accuracy: 0.1045
+Epoch: 8, Loss: 2.3039672730953495
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 9, Loss: 2.304278805481509
+Train Accuracy: 0.10018518518518518
+Validation Accuracy: 0.09833333333333333
+Epoch: 10, Loss: 2.303679417349417
+Train Accuracy: 0.10018518518518518
+Validation Accuracy: 0.09833333333333333
+Test Accuracy: 0.1
+Best Parameters (Based on Validation Accuracy):
+  activation: relu
+  batch_size: 16
+  beta: 0.9
+  beta1: 0.9
+  beta2: 0.999
+  decay: 0.005
+  epsilon: 1e-08
+  hidden_layers: 3
+  learning_rate: 0.05
+  momentum: 0.9
+  neurons: 32
+  optimizer: adam
+  weight_init: xavier
+Best Validation Accuracy: 0
+Test Accuracy with Best Parameters: 0.1
+Confusion Matrix (Best Parameters):
+[[   0    0    0    0    0    0    0    0 1000    0]
+ [   0    0    0    0    0    0    0    0 1000    0]
+ [   0    0    0    0    0    0    0    0 1000    0]
+ [   0    0    0    0    0    0    0    0 1000    0]
+ [   0    0    0    0    0    0    0    0 1000    0]
+ [   0    0    0    0    0    0    0    0 1000    0]
+ [   0    0    0    0    0    0    0    0 1000    0]
+ [   0    0    0    0    0    0    0    0 1000    0]
+ [   0    0    0    0    0    0    0    0 1000    0]
+ [   0    0    0    0    0    0    0    0 1000    0]]

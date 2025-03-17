@@ -1,0 +1,65 @@
+Initial Accuracy: 0.16253333333333334
+Epoch: 1, Loss: 11.113810715517923
+Train Accuracy: 0.5173333333333333
+Validation Accuracy: 0.5033333333333333
+Epoch: 2, Loss: 19.45172718003748
+Train Accuracy: 0.15522222222222223
+Validation Accuracy: 0.15533333333333332
+Epoch: 3, Loss: 15.491707224734567
+Train Accuracy: 0.3272037037037037
+Validation Accuracy: 0.3235
+c:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\train.py:141: RuntimeWarning: overflow encountered in subtract
+  exp_x = np.exp(x - max_x)
+c:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\train.py:154: RuntimeWarning: overflow encountered in matmul
+  self.pre_activation.append(np.matmul(self.post_activation[-1], self.weights[-1]) + self.biases[-1])
+c:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\train.py:141: RuntimeWarning: invalid value encountered in subtract
+  exp_x = np.exp(x - max_x)
+Epoch: 4, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 5, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 6, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 7, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 8, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 9, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 10, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Test Accuracy: 0.1
+Best Parameters (Based on Validation Accuracy):
+  activation: identity
+  batch_size: 16
+  beta: 0.9
+  beta1: 0.9
+  beta2: 0.999
+  decay: 0.0005
+  epsilon: 1e-08
+  hidden_layers: 1
+  learning_rate: 0.1
+  momentum: 0.8
+  neurons: 64
+  optimizer: momentum
+  weight_init: random
+Best Validation Accuracy: 0
+Test Accuracy with Best Parameters: 0.1
+Confusion Matrix (Best Parameters):
+[[1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]]

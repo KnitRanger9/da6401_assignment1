@@ -1,0 +1,16 @@
+{"time":"2025-03-17T22:43:35.4098276+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\wandb\\run-20250317_224335-83twumyh\\logs\\debug-core.log"}
+{"time":"2025-03-17T22:43:35.5234258+05:30","level":"INFO","msg":"created new stream","id":"83twumyh"}
+{"time":"2025-03-17T22:43:35.5234258+05:30","level":"INFO","msg":"stream: started","id":"83twumyh"}
+{"time":"2025-03-17T22:43:35.5234258+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"83twumyh"}
+{"time":"2025-03-17T22:43:35.5234258+05:30","level":"INFO","msg":"handler: started","stream_id":"83twumyh"}
+{"time":"2025-03-17T22:43:35.5234258+05:30","level":"INFO","msg":"sender: started","stream_id":"83twumyh"}
+{"time":"2025-03-17T22:43:35.8965008+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-17T22:43:45.5331887+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-17T22:43:45.5337679+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-17T22:43:46.5423208+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact run-83twumyh-confusion_matrix_table","runtime_seconds":1.0564502}],"total_operations":1}}
+{"time":"2025-03-17T22:43:48.1609621+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-17T22:43:48.4970137+05:30","level":"INFO","msg":"stream: closing","id":"83twumyh"}
+{"time":"2025-03-17T22:43:48.4970137+05:30","level":"INFO","msg":"handler: closed","stream_id":"83twumyh"}
+{"time":"2025-03-17T22:43:48.4970137+05:30","level":"INFO","msg":"sender: closed","stream_id":"83twumyh"}
+{"time":"2025-03-17T22:43:48.4970137+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"83twumyh"}
+{"time":"2025-03-17T22:43:48.4970137+05:30","level":"INFO","msg":"stream: closed","id":"83twumyh"}

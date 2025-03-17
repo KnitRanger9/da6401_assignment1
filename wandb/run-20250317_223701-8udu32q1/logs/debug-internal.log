@@ -1,0 +1,16 @@
+{"time":"2025-03-17T22:37:01.894147+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\wandb\\run-20250317_223701-8udu32q1\\logs\\debug-core.log"}
+{"time":"2025-03-17T22:37:02.0069526+05:30","level":"INFO","msg":"created new stream","id":"8udu32q1"}
+{"time":"2025-03-17T22:37:02.0069526+05:30","level":"INFO","msg":"stream: started","id":"8udu32q1"}
+{"time":"2025-03-17T22:37:02.0069526+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"8udu32q1"}
+{"time":"2025-03-17T22:37:02.0069526+05:30","level":"INFO","msg":"sender: started","stream_id":"8udu32q1"}
+{"time":"2025-03-17T22:37:02.0069526+05:30","level":"INFO","msg":"handler: started","stream_id":"8udu32q1"}
+{"time":"2025-03-17T22:37:14.7075314+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-17T22:37:21.1980328+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-17T22:37:21.1990839+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-17T22:37:22.2010498+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact run-8udu32q1-confusion_matrix_table","runtime_seconds":1.054627},{"desc":"uploading media\\table\\confusion_matrix_table_11_95da3edd0419d6b96ab2.table.json","runtime_seconds":0.7090471,"progress":"2.9KB/2.9KB"},{"desc":"uploading config.yaml","runtime_seconds":0.3762204,"progress":"2.4KB/2.4KB"}],"total_operations":3}}
+{"time":"2025-03-17T22:37:23.9442433+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-17T22:37:24.2892093+05:30","level":"INFO","msg":"stream: closing","id":"8udu32q1"}
+{"time":"2025-03-17T22:37:24.2892093+05:30","level":"INFO","msg":"handler: closed","stream_id":"8udu32q1"}
+{"time":"2025-03-17T22:37:24.2892093+05:30","level":"INFO","msg":"sender: closed","stream_id":"8udu32q1"}
+{"time":"2025-03-17T22:37:24.2892093+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"8udu32q1"}
+{"time":"2025-03-17T22:37:24.2892093+05:30","level":"INFO","msg":"stream: closed","id":"8udu32q1"}

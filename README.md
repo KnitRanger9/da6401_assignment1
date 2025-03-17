@@ -2,7 +2,7 @@
 
 ## Authors: Aritra Maji (DA24M004)
 
-1. There are two files train.py and train_non_wandb. train.py is to perform sweep using wandb, and train_non_wandb.py is to test the model for specific hyperparameters. 
+1. There are two files train_wandb.py and train.py. train_wandb.py is to perform sweep using wandb, and train.py is to test the model for specific hyperparameters. 
 
 2. For creating a model, the syntax is given below. It is almost the same as in tensorflow/keras.
 

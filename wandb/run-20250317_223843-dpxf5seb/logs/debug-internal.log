@@ -1,0 +1,16 @@
+{"time":"2025-03-17T22:38:43.6220657+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\wandb\\run-20250317_223843-dpxf5seb\\logs\\debug-core.log"}
+{"time":"2025-03-17T22:38:43.73603+05:30","level":"INFO","msg":"created new stream","id":"dpxf5seb"}
+{"time":"2025-03-17T22:38:43.73603+05:30","level":"INFO","msg":"stream: started","id":"dpxf5seb"}
+{"time":"2025-03-17T22:38:43.73603+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"dpxf5seb"}
+{"time":"2025-03-17T22:38:43.73603+05:30","level":"INFO","msg":"sender: started","stream_id":"dpxf5seb"}
+{"time":"2025-03-17T22:38:43.73603+05:30","level":"INFO","msg":"handler: started","stream_id":"dpxf5seb"}
+{"time":"2025-03-17T22:38:44.1241943+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-17T22:38:52.9236115+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-17T22:38:52.9241141+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-17T22:38:53.9313448+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact run-dpxf5seb-confusion_matrix_table","runtime_seconds":1.0574834}],"total_operations":1}}
+{"time":"2025-03-17T22:38:57.9004703+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-17T22:38:58.2811049+05:30","level":"INFO","msg":"stream: closing","id":"dpxf5seb"}
+{"time":"2025-03-17T22:38:58.2811049+05:30","level":"INFO","msg":"handler: closed","stream_id":"dpxf5seb"}
+{"time":"2025-03-17T22:38:58.2811049+05:30","level":"INFO","msg":"sender: closed","stream_id":"dpxf5seb"}
+{"time":"2025-03-17T22:38:58.2811049+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"dpxf5seb"}
+{"time":"2025-03-17T22:38:58.2811049+05:30","level":"INFO","msg":"stream: closed","id":"dpxf5seb"}

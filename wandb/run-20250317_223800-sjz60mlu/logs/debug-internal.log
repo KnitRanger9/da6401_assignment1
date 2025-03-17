@@ -1,0 +1,16 @@
+{"time":"2025-03-17T22:38:00.2449981+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\wandb\\run-20250317_223800-sjz60mlu\\logs\\debug-core.log"}
+{"time":"2025-03-17T22:38:00.3576125+05:30","level":"INFO","msg":"created new stream","id":"sjz60mlu"}
+{"time":"2025-03-17T22:38:00.3576125+05:30","level":"INFO","msg":"stream: started","id":"sjz60mlu"}
+{"time":"2025-03-17T22:38:00.3576125+05:30","level":"INFO","msg":"handler: started","stream_id":"sjz60mlu"}
+{"time":"2025-03-17T22:38:00.3576125+05:30","level":"INFO","msg":"sender: started","stream_id":"sjz60mlu"}
+{"time":"2025-03-17T22:38:00.3576125+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"sjz60mlu"}
+{"time":"2025-03-17T22:38:00.7103197+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-17T22:38:10.3965817+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-17T22:38:10.3971204+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-17T22:38:11.4003519+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact run-sjz60mlu-confusion_matrix_table","runtime_seconds":1.0505757}],"total_operations":1}}
+{"time":"2025-03-17T22:38:24.1062058+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-17T22:38:24.6013343+05:30","level":"INFO","msg":"stream: closing","id":"sjz60mlu"}
+{"time":"2025-03-17T22:38:24.6013343+05:30","level":"INFO","msg":"handler: closed","stream_id":"sjz60mlu"}
+{"time":"2025-03-17T22:38:24.6013343+05:30","level":"INFO","msg":"sender: closed","stream_id":"sjz60mlu"}
+{"time":"2025-03-17T22:38:24.6013343+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"sjz60mlu"}
+{"time":"2025-03-17T22:38:24.6013343+05:30","level":"INFO","msg":"stream: closed","id":"sjz60mlu"}

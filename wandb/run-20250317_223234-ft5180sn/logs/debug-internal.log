@@ -1,0 +1,16 @@
+{"time":"2025-03-17T22:32:34.3617159+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\wandb\\run-20250317_223234-ft5180sn\\logs\\debug-core.log"}
+{"time":"2025-03-17T22:32:34.4740201+05:30","level":"INFO","msg":"created new stream","id":"ft5180sn"}
+{"time":"2025-03-17T22:32:34.4740201+05:30","level":"INFO","msg":"stream: started","id":"ft5180sn"}
+{"time":"2025-03-17T22:32:34.4740201+05:30","level":"INFO","msg":"handler: started","stream_id":"ft5180sn"}
+{"time":"2025-03-17T22:32:34.4740201+05:30","level":"INFO","msg":"sender: started","stream_id":"ft5180sn"}
+{"time":"2025-03-17T22:32:34.4740201+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"ft5180sn"}
+{"time":"2025-03-17T22:32:35.0594083+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-17T22:32:41.6781206+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-17T22:32:41.6786242+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-17T22:32:42.6861983+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact run-ft5180sn-confusion_matrix_table","runtime_seconds":1.0622391},{"desc":"uploading media\\table\\confusion_matrix_table_11_dab8081a4bd1e73beb41.table.json","runtime_seconds":0.7164652,"progress":"2.9KB/2.9KB"},{"desc":"uploading output.log","runtime_seconds":0.7164652,"progress":"1.9KB/1.9KB"},{"desc":"uploading wandb-summary.json","runtime_seconds":0.7164652,"progress":"908B/908B"},{"desc":"uploading config.yaml","runtime_seconds":0.3246289,"progress":"2.4KB/2.4KB"}],"total_operations":5}}
+{"time":"2025-03-17T22:32:44.5094601+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-17T22:32:44.8571425+05:30","level":"INFO","msg":"stream: closing","id":"ft5180sn"}
+{"time":"2025-03-17T22:32:44.8571425+05:30","level":"INFO","msg":"handler: closed","stream_id":"ft5180sn"}
+{"time":"2025-03-17T22:32:44.8571425+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"ft5180sn"}
+{"time":"2025-03-17T22:32:44.8571425+05:30","level":"INFO","msg":"sender: closed","stream_id":"ft5180sn"}
+{"time":"2025-03-17T22:32:44.8571425+05:30","level":"INFO","msg":"stream: closed","id":"ft5180sn"}

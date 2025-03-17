@@ -1,0 +1,40 @@
+wandb_version: 1
+
+activation:
+  value: sigmoid
+batch_size:
+  value: 16
+beta:
+  value: 0.9
+beta1:
+  value: 0.9
+beta2:
+  value: 0.999
+dataset:
+  value: fashion_mnist
+decay:
+  value: 0.0005
+epochs:
+  value: 10
+epsilon:
+  value: 1.0e-08
+hidden_layers:
+  value: 4
+input_size:
+  value: 784
+learning_rate:
+  value: 0.001
+loss:
+  value: cross_entropy
+momentum:
+  value: 0.8
+neurons:
+  value: 16
+optimizer:
+  value: sgd
+output_activation:
+  value: softmax
+output_size:
+  value: 10
+weight_init:
+  value: random

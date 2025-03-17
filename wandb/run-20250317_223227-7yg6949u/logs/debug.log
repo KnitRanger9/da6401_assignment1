@@ -1,0 +1,29 @@
+2025-03-17 22:32:27,952 INFO    MainThread:15024 [wandb_setup.py:_flush():67] Current SDK version is 0.19.8
+2025-03-17 22:32:27,952 INFO    MainThread:15024 [wandb_setup.py:_flush():67] Configure stats pid to 15024
+2025-03-17 22:32:27,952 INFO    MainThread:15024 [wandb_setup.py:_flush():67] Loading settings from C:\Users\aritr\.config\wandb\settings
+2025-03-17 22:32:27,952 INFO    MainThread:15024 [wandb_setup.py:_flush():67] Loading settings from C:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\wandb\settings
+2025-03-17 22:32:27,952 INFO    MainThread:15024 [wandb_setup.py:_flush():67] Loading settings from environment variables
+2025-03-17 22:32:27,952 INFO    MainThread:15024 [wandb_init.py:setup_run_log_directory():647] Logging user logs to C:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\wandb\run-20250317_223227-7yg6949u\logs\debug.log
+2025-03-17 22:32:27,954 INFO    MainThread:15024 [wandb_init.py:setup_run_log_directory():648] Logging internal logs to C:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\wandb\run-20250317_223227-7yg6949u\logs\debug-internal.log
+2025-03-17 22:32:27,954 INFO    MainThread:15024 [wandb_init.py:init():761] calling init triggers
+2025-03-17 22:32:27,954 INFO    MainThread:15024 [wandb_init.py:init():766] wandb.init called with sweep_config: {}
+config: {'_wandb': {}}
+2025-03-17 22:32:27,954 INFO    MainThread:15024 [wandb_init.py:init():784] starting backend
+2025-03-17 22:32:27,954 INFO    MainThread:15024 [wandb_init.py:init():788] sending inform_init request
+2025-03-17 22:32:27,968 INFO    MainThread:15024 [backend.py:_multiprocessing_setup():101] multiprocessing start_methods=spawn, using: spawn
+2025-03-17 22:32:27,968 INFO    MainThread:15024 [wandb_init.py:init():798] backend started and connected
+2025-03-17 22:32:27,969 INFO    MainThread:15024 [wandb_init.py:init():891] updated telemetry
+2025-03-17 22:32:28,008 INFO    MainThread:15024 [wandb_init.py:init():915] communicating run to backend with 90.0 second timeout
+2025-03-17 22:32:28,477 INFO    MainThread:15024 [wandb_init.py:init():990] starting run threads in backend
+2025-03-17 22:32:28,558 INFO    MainThread:15024 [wandb_run.py:_console_start():2375] atexit reg
+2025-03-17 22:32:28,558 INFO    MainThread:15024 [wandb_run.py:_redirect():2227] redirect: wrap_raw
+2025-03-17 22:32:28,558 INFO    MainThread:15024 [wandb_run.py:_redirect():2292] Wrapping output streams.
+2025-03-17 22:32:28,558 INFO    MainThread:15024 [wandb_run.py:_redirect():2315] Redirects installed.
+2025-03-17 22:32:28,562 INFO    MainThread:15024 [wandb_init.py:init():1032] run started, returning control to user process
+2025-03-17 22:32:29,503 INFO    MainThread:15024 [wandb_run.py:_finish():2112] finishing run da24m004-iitmaana/neural-network-sweep/7yg6949u
+2025-03-17 22:32:29,504 INFO    MainThread:15024 [wandb_run.py:_atexit_cleanup():2340] got exitcode: 0
+2025-03-17 22:32:29,504 INFO    MainThread:15024 [wandb_run.py:_restore():2322] restore
+2025-03-17 22:32:29,504 INFO    MainThread:15024 [wandb_run.py:_restore():2328] restore done
+2025-03-17 22:32:31,467 INFO    MainThread:15024 [wandb_run.py:_footer_history_summary_info():3956] rendering history
+2025-03-17 22:32:31,467 INFO    MainThread:15024 [wandb_run.py:_footer_history_summary_info():3988] rendering summary
+2025-03-17 22:32:31,467 INFO    MainThread:15024 [wandb_run.py:_footer_sync_info():3917] logging synced files

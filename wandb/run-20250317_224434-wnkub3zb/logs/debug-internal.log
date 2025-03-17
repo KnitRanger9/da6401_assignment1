@@ -1,0 +1,16 @@
+{"time":"2025-03-17T22:44:34.4433795+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\wandb\\run-20250317_224434-wnkub3zb\\logs\\debug-core.log"}
+{"time":"2025-03-17T22:44:34.5555847+05:30","level":"INFO","msg":"created new stream","id":"wnkub3zb"}
+{"time":"2025-03-17T22:44:34.5555847+05:30","level":"INFO","msg":"stream: started","id":"wnkub3zb"}
+{"time":"2025-03-17T22:44:34.5555847+05:30","level":"INFO","msg":"handler: started","stream_id":"wnkub3zb"}
+{"time":"2025-03-17T22:44:34.5555847+05:30","level":"INFO","msg":"sender: started","stream_id":"wnkub3zb"}
+{"time":"2025-03-17T22:44:34.5555847+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"wnkub3zb"}
+{"time":"2025-03-17T22:44:34.9379241+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-17T22:44:48.9925619+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-17T22:44:48.9933224+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-17T22:44:50.0074905+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact run-wnkub3zb-confusion_matrix_table","runtime_seconds":1.0650793},{"desc":"uploading media\\table\\confusion_matrix_table_11_acecddeab1016f4bf375.table.json","runtime_seconds":0.7367411,"progress":"2.9KB/2.9KB"},{"desc":"uploading output.log","runtime_seconds":0.7367411,"progress":"1.9KB/1.9KB"},{"desc":"uploading config.yaml","runtime_seconds":0.39141,"progress":"2.4KB/2.4KB"}],"total_operations":4}}
+{"time":"2025-03-17T22:44:51.5515162+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-17T22:44:51.8456246+05:30","level":"INFO","msg":"stream: closing","id":"wnkub3zb"}
+{"time":"2025-03-17T22:44:51.8456246+05:30","level":"INFO","msg":"handler: closed","stream_id":"wnkub3zb"}
+{"time":"2025-03-17T22:44:51.8456246+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"wnkub3zb"}
+{"time":"2025-03-17T22:44:51.8456246+05:30","level":"INFO","msg":"sender: closed","stream_id":"wnkub3zb"}
+{"time":"2025-03-17T22:44:51.8456246+05:30","level":"INFO","msg":"stream: closed","id":"wnkub3zb"}

@@ -1,0 +1,16 @@
+{"time":"2025-03-17T22:43:52.3517636+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\wandb\\run-20250317_224352-0o75t7zk\\logs\\debug-core.log"}
+{"time":"2025-03-17T22:43:52.4640179+05:30","level":"INFO","msg":"created new stream","id":"0o75t7zk"}
+{"time":"2025-03-17T22:43:52.4640179+05:30","level":"INFO","msg":"stream: started","id":"0o75t7zk"}
+{"time":"2025-03-17T22:43:52.4640179+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"0o75t7zk"}
+{"time":"2025-03-17T22:43:52.4640179+05:30","level":"INFO","msg":"handler: started","stream_id":"0o75t7zk"}
+{"time":"2025-03-17T22:43:52.4640179+05:30","level":"INFO","msg":"sender: started","stream_id":"0o75t7zk"}
+{"time":"2025-03-17T22:43:52.8061076+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-17T22:44:04.7304158+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-17T22:44:04.7309575+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-17T22:44:05.7361405+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact run-0o75t7zk-confusion_matrix_table","runtime_seconds":1.0536185},{"desc":"uploading config.yaml","runtime_seconds":0.3268794,"progress":"2.4KB/2.4KB"}],"total_operations":2}}
+{"time":"2025-03-17T22:44:07.5167996+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-17T22:44:08.0227108+05:30","level":"INFO","msg":"stream: closing","id":"0o75t7zk"}
+{"time":"2025-03-17T22:44:08.0227108+05:30","level":"INFO","msg":"handler: closed","stream_id":"0o75t7zk"}
+{"time":"2025-03-17T22:44:08.0227108+05:30","level":"INFO","msg":"sender: closed","stream_id":"0o75t7zk"}
+{"time":"2025-03-17T22:44:08.0227108+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"0o75t7zk"}
+{"time":"2025-03-17T22:44:08.0227108+05:30","level":"INFO","msg":"stream: closed","id":"0o75t7zk"}

@@ -1,0 +1,61 @@
+Initial Accuracy: 0.10228333333333334
+c:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\train.py:151: RuntimeWarning: invalid value encountered in matmul
+  self.pre_activation.append(np.matmul(self.post_activation[-1], self.weights[i]) + self.biases[i])
+Epoch: 1, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 2, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 3, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 4, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 5, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 6, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 7, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 8, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 9, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 10, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Test Accuracy: 0.1
+Best Parameters (Based on Validation Accuracy):
+  activation: identity
+  batch_size: 64
+  beta: 0.9
+  beta1: 0.9
+  beta2: 0.999
+  decay: 0
+  epsilon: 1e-08
+  hidden_layers: 4
+  learning_rate: 0.1
+  momentum: 0.7
+  neurons: 128
+  optimizer: momentum
+  weight_init: xavier
+Best Validation Accuracy: 0
+Test Accuracy with Best Parameters: 0.1
+Confusion Matrix (Best Parameters):
+[[1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]]

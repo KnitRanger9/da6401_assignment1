@@ -1,0 +1,59 @@
+Initial Accuracy: 0.10003333333333334
+Epoch: 1, Loss: 0.6000896253660816
+Train Accuracy: 0.788962962962963
+Validation Accuracy: 0.7811666666666667
+Epoch: 2, Loss: 0.48468968334480816
+Train Accuracy: 0.8311666666666667
+Validation Accuracy: 0.8231666666666667
+Epoch: 3, Loss: 0.4431426608171851
+Train Accuracy: 0.8452592592592593
+Validation Accuracy: 0.8406666666666667
+Epoch: 4, Loss: 0.4195512621001706
+Train Accuracy: 0.8536481481481482
+Validation Accuracy: 0.8488333333333333
+Epoch: 5, Loss: 0.4046202746927251
+Train Accuracy: 0.8567777777777777
+Validation Accuracy: 0.8491666666666666
+Epoch: 6, Loss: 0.3847437506416518
+Train Accuracy: 0.8639814814814815
+Validation Accuracy: 0.8568333333333333
+Epoch: 7, Loss: 0.38074073324866187
+Train Accuracy: 0.8650185185185185
+Validation Accuracy: 0.8561666666666666
+Epoch: 8, Loss: 0.3692860739444867
+Train Accuracy: 0.8697777777777778
+Validation Accuracy: 0.8626666666666667
+Epoch: 9, Loss: 0.34587879164893104
+Train Accuracy: 0.8768333333333334
+Validation Accuracy: 0.8718333333333333
+Epoch: 10, Loss: 0.3418814225900319
+Train Accuracy: 0.8796851851851852
+Validation Accuracy: 0.8736666666666667
+Test Accuracy: 0.8599
+Best Parameters (Based on Validation Accuracy):
+  activation: relu
+  batch_size: 32
+  beta: 0.9
+  beta1: 0.9
+  beta2: 0.999
+  decay: 0.005
+  epsilon: 1e-08
+  hidden_layers: 3
+  learning_rate: 0.001
+  momentum: 0.9
+  neurons: 64
+  optimizer: momentum
+  weight_init: xavier
+Best Validation Accuracy: 0
+Test Accuracy with Best Parameters: 0.8599
+Confusion Matrix (Best Parameters):
+[[797   0  34  41   4   2 111   0  11   0]
+ [  2 960   3  28   3   0   3   0   1   0]
+ [  9   2 838  12  94   0  43   0   2   0]
+ [ 18  11  21 891  27   0  27   0   5   0]
+ [  0   1 151  42 751   0  51   0   4   0]
+ [  0   0   0   1   0 957   0  34   2   6]
+ [119   1 152  41  94   0 578   0  15   0]
+ [  0   0   0   0   0  31   0 956   0  13]
+ [  1   1  15  11   3   4   8   6 951   0]
+ [  0   0   0   0   0  18   1  61   0 920]]
