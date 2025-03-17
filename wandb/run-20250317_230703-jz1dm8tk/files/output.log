@@ -1,0 +1,59 @@
+Initial Accuracy: 0.06773333333333334
+Epoch: 1, Loss: 2.386138298143672
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 2, Loss: 2.3497896793998057
+Train Accuracy: 0.0997962962962963
+Validation Accuracy: 0.10183333333333333
+Epoch: 3, Loss: 1.260945896742862
+Train Accuracy: 0.4555925925925926
+Validation Accuracy: 0.45366666666666666
+Epoch: 4, Loss: 1.3170180787556154
+Train Accuracy: 0.3505740740740741
+Validation Accuracy: 0.3473333333333333
+Epoch: 5, Loss: 1.4492136283980248
+Train Accuracy: 0.32185185185185183
+Validation Accuracy: 0.3175
+Epoch: 6, Loss: 1.2073802046764823
+Train Accuracy: 0.4562222222222222
+Validation Accuracy: 0.44766666666666666
+Epoch: 7, Loss: 1.2579794147816057
+Train Accuracy: 0.46414814814814814
+Validation Accuracy: 0.45316666666666666
+Epoch: 8, Loss: 1.1862638794568086
+Train Accuracy: 0.46594444444444444
+Validation Accuracy: 0.45366666666666666
+Epoch: 9, Loss: 1.2570746566564948
+Train Accuracy: 0.45775925925925925
+Validation Accuracy: 0.4508333333333333
+Epoch: 10, Loss: 1.1582543203637796
+Train Accuracy: 0.4744074074074074
+Validation Accuracy: 0.4613333333333333
+Test Accuracy: 0.4725
+Best Parameters (Based on Validation Accuracy):
+  activation: tanh
+  batch_size: 64
+  beta: 0.9
+  beta1: 0.9
+  beta2: 0.999
+  decay: 0.005
+  epsilon: 1e-08
+  hidden_layers: 4
+  learning_rate: 0.05
+  momentum: 0.7
+  neurons: 64
+  optimizer: adam
+  weight_init: xavier
+Best Validation Accuracy: 0
+Test Accuracy with Best Parameters: 0.4725
+Confusion Matrix (Best Parameters):
+[[  1   0 105 878   0   0   1   0  13   2]
+ [  0   0  23 975   0   0   0   0   2   0]
+ [  0   0 974  20   0   1   2   0   3   0]
+ [  0   0  77 921   0   1   0   0   1   0]
+ [  0   0 898  96   0   1   1   0   4   0]
+ [  0   0   0   0   0  64   0 604  11 321]
+ [  1   0 672 303   0   0   0   0  24   0]
+ [  0   0   0   0   0   4   0 949   0  47]
+ [  0   0  60   6   0   1   0  10 923   0]
+ [  0   0   0   0   0   5   0 101   1 893]]

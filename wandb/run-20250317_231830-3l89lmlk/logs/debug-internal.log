@@ -1,0 +1,16 @@
+{"time":"2025-03-17T23:18:30.4525687+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\wandb\\run-20250317_231830-3l89lmlk\\logs\\debug-core.log"}
+{"time":"2025-03-17T23:18:30.5649694+05:30","level":"INFO","msg":"created new stream","id":"3l89lmlk"}
+{"time":"2025-03-17T23:18:30.5649694+05:30","level":"INFO","msg":"stream: started","id":"3l89lmlk"}
+{"time":"2025-03-17T23:18:30.5649694+05:30","level":"INFO","msg":"handler: started","stream_id":"3l89lmlk"}
+{"time":"2025-03-17T23:18:30.5649694+05:30","level":"INFO","msg":"sender: started","stream_id":"3l89lmlk"}
+{"time":"2025-03-17T23:18:30.5649694+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"3l89lmlk"}
+{"time":"2025-03-17T23:18:30.9247308+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-17T23:18:40.2844885+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-17T23:18:40.2852444+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-17T23:18:41.3004959+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact run-3l89lmlk-confusion_matrix_table","runtime_seconds":1.0621139},{"desc":"uploading wandb-summary.json","runtime_seconds":0.7212581,"progress":"920B/920B"},{"desc":"uploading media\\table\\confusion_matrix_table_11_ccffb13ad988bce5d7ad.table.json","runtime_seconds":0.7212581,"progress":"2.9KB/2.9KB"},{"desc":"uploading config.yaml","runtime_seconds":0.4102339,"progress":"2.4KB/2.4KB"}],"total_operations":4}}
+{"time":"2025-03-17T23:18:42.9673663+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-17T23:18:43.3064872+05:30","level":"INFO","msg":"stream: closing","id":"3l89lmlk"}
+{"time":"2025-03-17T23:18:43.3064872+05:30","level":"INFO","msg":"handler: closed","stream_id":"3l89lmlk"}
+{"time":"2025-03-17T23:18:43.3064872+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"3l89lmlk"}
+{"time":"2025-03-17T23:18:43.3064872+05:30","level":"INFO","msg":"sender: closed","stream_id":"3l89lmlk"}
+{"time":"2025-03-17T23:18:43.3064872+05:30","level":"INFO","msg":"stream: closed","id":"3l89lmlk"}

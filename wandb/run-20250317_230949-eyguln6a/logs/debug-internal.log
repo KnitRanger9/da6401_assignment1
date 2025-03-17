@@ -1,0 +1,16 @@
+{"time":"2025-03-17T23:09:49.4668823+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\wandb\\run-20250317_230949-eyguln6a\\logs\\debug-core.log"}
+{"time":"2025-03-17T23:09:49.5798521+05:30","level":"INFO","msg":"created new stream","id":"eyguln6a"}
+{"time":"2025-03-17T23:09:49.5798521+05:30","level":"INFO","msg":"stream: started","id":"eyguln6a"}
+{"time":"2025-03-17T23:09:49.5798521+05:30","level":"INFO","msg":"handler: started","stream_id":"eyguln6a"}
+{"time":"2025-03-17T23:09:49.5798521+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"eyguln6a"}
+{"time":"2025-03-17T23:09:49.5798521+05:30","level":"INFO","msg":"sender: started","stream_id":"eyguln6a"}
+{"time":"2025-03-17T23:09:49.907011+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-17T23:10:13.141037+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-17T23:10:13.1417788+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-17T23:10:14.1448637+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact run-eyguln6a-confusion_matrix_table","runtime_seconds":1.058426},{"desc":"uploading output.log","runtime_seconds":0.7352588,"progress":"1.9KB/1.9KB"},{"desc":"uploading config.yaml","runtime_seconds":0.4094567,"progress":"2.4KB/2.4KB"}],"total_operations":3}}
+{"time":"2025-03-17T23:10:16.5681303+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-17T23:10:16.8901847+05:30","level":"INFO","msg":"stream: closing","id":"eyguln6a"}
+{"time":"2025-03-17T23:10:16.8901847+05:30","level":"INFO","msg":"handler: closed","stream_id":"eyguln6a"}
+{"time":"2025-03-17T23:10:16.8901847+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"eyguln6a"}
+{"time":"2025-03-17T23:10:16.8901847+05:30","level":"INFO","msg":"sender: closed","stream_id":"eyguln6a"}
+{"time":"2025-03-17T23:10:16.8901847+05:30","level":"INFO","msg":"stream: closed","id":"eyguln6a"}

@@ -1,0 +1,16 @@
+{"time":"2025-03-17T23:14:09.7923284+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\wandb\\run-20250317_231409-3eskczmg\\logs\\debug-core.log"}
+{"time":"2025-03-17T23:14:09.9051087+05:30","level":"INFO","msg":"created new stream","id":"3eskczmg"}
+{"time":"2025-03-17T23:14:09.9051087+05:30","level":"INFO","msg":"stream: started","id":"3eskczmg"}
+{"time":"2025-03-17T23:14:09.9051087+05:30","level":"INFO","msg":"handler: started","stream_id":"3eskczmg"}
+{"time":"2025-03-17T23:14:09.9051087+05:30","level":"INFO","msg":"sender: started","stream_id":"3eskczmg"}
+{"time":"2025-03-17T23:14:09.9051087+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"3eskczmg"}
+{"time":"2025-03-17T23:14:10.2763772+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-17T23:14:44.3971187+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-17T23:14:44.3980486+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-17T23:14:45.4075678+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact run-3eskczmg-confusion_matrix_table","runtime_seconds":1.0709276},{"desc":"uploading config.yaml","runtime_seconds":0.3048082,"progress":"2.4KB/2.4KB"}],"total_operations":2}}
+{"time":"2025-03-17T23:14:47.1352334+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-17T23:14:47.4810622+05:30","level":"INFO","msg":"stream: closing","id":"3eskczmg"}
+{"time":"2025-03-17T23:14:47.4810622+05:30","level":"INFO","msg":"handler: closed","stream_id":"3eskczmg"}
+{"time":"2025-03-17T23:14:47.4810622+05:30","level":"INFO","msg":"sender: closed","stream_id":"3eskczmg"}
+{"time":"2025-03-17T23:14:47.4810622+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"3eskczmg"}
+{"time":"2025-03-17T23:14:47.4810622+05:30","level":"INFO","msg":"stream: closed","id":"3eskczmg"}

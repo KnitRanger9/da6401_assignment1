@@ -91,3 +91,6 @@
     NAdam()
 
     ```
+
+github link: https://github.com/KnitRanger9/da6401_assignment1.git
+wandb report: https://wandb.ai/da24m004-iitmaana/neural-network-sweep/reports/DA6401-Assignment-1--VmlldzoxMTg0MTI3Mg

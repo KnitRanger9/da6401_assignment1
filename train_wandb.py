@@ -99,28 +99,28 @@ class_dict = {
    }
  
 def visualize_data(X_train):
-plt.figure(figsize=(10,10))
+    plt.figure(figsize=(10,10))
 
-for i in range(5):
-    plt.subplot(1,5,i+1)
-    plt.imshow(X_train[i], cmap="gray")
-    plt.title(f"Image {i+1}")
-plt.show()
+    for i in range(5):
+        plt.subplot(1,5,i+1)
+        plt.imshow(X_train[i], cmap="gray")
+        plt.title(f"Image {i+1}")
+    plt.show()
 
-plt.figure(figsize=[10, 5])
-images = []
-classes = []
+    plt.figure(figsize=[10, 5])
+    images = []
+    classes = []
 
-for i in range(n_class):
-    position = next((x for x in range(len(y_train)) if y_train[x] == i), None)
-    image = x_train[position,:,:]
-    plt.subplot(2, 5, i+1)
-    plt.imshow(image)
-    plt.title(class_dict[i])
-    images.append(image)
-    classes.append(class_dict[i])
-    
-wandb.log({"Question 1": [wandb.Image(img, caption=caption) for img, caption in zip(images, classes)]})
+    for i in range(n_class):
+        position = next((x for x in range(len(y_train)) if y_train[x] == i), None)
+        image = x_train[position,:,:]
+        plt.subplot(2, 5, i+1)
+        plt.imshow(image)
+        plt.title(class_dict[i])
+        images.append(image)
+        classes.append(class_dict[i])
+        
+    wandb.log({"Question 1": [wandb.Image(img, caption=caption) for img, caption in zip(images, classes)]})
 
 def log_examples():
     wandb.init(project=WANDB_PROJECT, entity=wandb.api.default_entity)  # Fixed entity attribute
@@ -647,7 +647,7 @@ def run_sweep(sweep_conf=sweep_configuration):
     
     print(f"Sweep ID: {sweep_id}")
     print("Running sweep agent...")
-    wandb.agent(sweep_id, function=train_sweep, count=80)
+    wandb.agent(sweep_id, function=train_sweep, count=50)
     # api = wandb.Api()
     # sweep = api.sweep(f"your-username/your-project-name/{sweep_id}")
     # best_run = sweep.best_run()

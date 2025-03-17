@@ -1,0 +1,59 @@
+Initial Accuracy: 0.07738333333333333
+Epoch: 1, Loss: 15.5659810466438
+Train Accuracy: 0.10018518518518518
+Validation Accuracy: 0.09833333333333333
+Epoch: 2, Loss: 13.056999219881193
+Train Accuracy: 0.10092592592592593
+Validation Accuracy: 0.09166666666666666
+Epoch: 3, Loss: 10.419329610223937
+Train Accuracy: 0.09961111111111111
+Validation Accuracy: 0.1035
+Epoch: 4, Loss: 15.25778028197406
+Train Accuracy: 0.10092592592592593
+Validation Accuracy: 0.09166666666666666
+Epoch: 5, Loss: 17.797377335304535
+Train Accuracy: 0.0995
+Validation Accuracy: 0.1045
+Epoch: 6, Loss: 10.438513648232922
+Train Accuracy: 0.10018518518518518
+Validation Accuracy: 0.09833333333333333
+Epoch: 7, Loss: 14.423648021255097
+Train Accuracy: 0.10018518518518518
+Validation Accuracy: 0.09833333333333333
+Epoch: 8, Loss: 12.719096540531396
+Train Accuracy: 0.09985185185185186
+Validation Accuracy: 0.10133333333333333
+Epoch: 9, Loss: 7.5769364877464165
+Train Accuracy: 0.10018518518518518
+Validation Accuracy: 0.09833333333333333
+Epoch: 10, Loss: 17.302596779480233
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Test Accuracy: 0.1
+Best Parameters (Based on Validation Accuracy):
+  activation: tanh
+  batch_size: 64
+  beta: 0.9
+  beta1: 0.9
+  beta2: 0.999
+  decay: 0.0005
+  epsilon: 1e-08
+  hidden_layers: 3
+  learning_rate: 0.1
+  momentum: 0.8
+  neurons: 128
+  optimizer: rmsprop
+  weight_init: random
+Best Validation Accuracy: 0
+Test Accuracy with Best Parameters: 0.1
+Confusion Matrix (Best Parameters):
+[[1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]
+ [1000    0    0    0    0    0    0    0    0    0]]

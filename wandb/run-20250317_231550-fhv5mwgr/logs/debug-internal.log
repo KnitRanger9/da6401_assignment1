@@ -1,0 +1,16 @@
+{"time":"2025-03-17T23:15:50.6266848+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\wandb\\run-20250317_231550-fhv5mwgr\\logs\\debug-core.log"}
+{"time":"2025-03-17T23:15:50.7446097+05:30","level":"INFO","msg":"created new stream","id":"fhv5mwgr"}
+{"time":"2025-03-17T23:15:50.7446097+05:30","level":"INFO","msg":"stream: started","id":"fhv5mwgr"}
+{"time":"2025-03-17T23:15:50.7446097+05:30","level":"INFO","msg":"handler: started","stream_id":"fhv5mwgr"}
+{"time":"2025-03-17T23:15:50.7446097+05:30","level":"INFO","msg":"sender: started","stream_id":"fhv5mwgr"}
+{"time":"2025-03-17T23:15:50.7446097+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"fhv5mwgr"}
+{"time":"2025-03-17T23:15:51.2373925+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-17T23:16:01.872363+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-17T23:16:01.8728676+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-17T23:16:02.8764396+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading artifact run-fhv5mwgr-confusion_matrix_table","runtime_seconds":1.0550572},{"desc":"uploading config.yaml","runtime_seconds":0.3392406,"progress":"2.4KB/2.4KB"}],"total_operations":2}}
+{"time":"2025-03-17T23:16:04.6643998+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-17T23:16:04.9870032+05:30","level":"INFO","msg":"stream: closing","id":"fhv5mwgr"}
+{"time":"2025-03-17T23:16:04.9870032+05:30","level":"INFO","msg":"handler: closed","stream_id":"fhv5mwgr"}
+{"time":"2025-03-17T23:16:04.9870032+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"fhv5mwgr"}
+{"time":"2025-03-17T23:16:04.9870032+05:30","level":"INFO","msg":"sender: closed","stream_id":"fhv5mwgr"}
+{"time":"2025-03-17T23:16:04.9870032+05:30","level":"INFO","msg":"stream: closed","id":"fhv5mwgr"}
