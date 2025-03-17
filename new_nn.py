@@ -1,3 +1,4 @@
+import numpy as np
 class FFNeuralNetwork():
     def __init__(self,
                 neurons=128,

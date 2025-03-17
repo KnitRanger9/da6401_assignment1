@@ -1,4 +1,4 @@
-from utils import *
+import numpy as np
 
 class MSE_loss:
   def __init__(self):
