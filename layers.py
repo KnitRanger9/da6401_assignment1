@@ -1,5 +1,7 @@
 from utils import *
 from activations import *
+from optim import *
+from copy import deepcopy
 
 activations = {"sigmoid": Sigmoid(), "relu": ReLU(), "tanh": TanH(), "softmax": Softmax()}
 
@@ -7,6 +9,7 @@ class A_x():
     def __init__(self, X):
         self.X = X
         self.n = X.shape[0]
+        self.size=0
 
 
 class Dense():
@@ -15,3 +18,5 @@ class Dense():
         self.size = size
         self.activation = activations[activation]
         self.last = last
+        self.W_optimizer = deepcopy(SGD())
+        self.b_optimizer = deepcopy(SGD())

@@ -1,0 +1,11 @@
+Train data shape: (784, 48000)
+Validation data shape: (784, 12000)
+Test data shape: (784, 10000)
+Traceback (most recent call last):
+  File "C:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\train.py", line 97, in <module>
+    model = NeuralNetwork(layers,
+  File "C:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\new_nn.py", line 49, in __init__
+    self.init_params(optimizer,optim_params)
+  File "C:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\new_nn.py", line 107, in init_params
+    layer.W_optimizer.set_params(optim_params)
+AttributeError: 'NoneType' object has no attribute 'set_params'

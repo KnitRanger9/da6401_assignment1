@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "C:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\train.py", line 78, in <module>
+    y_train_encoded = onehot.transform(y_train)
+TypeError: OneHot.transform() takes 1 positional argument but 2 were given

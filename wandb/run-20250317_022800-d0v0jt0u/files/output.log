@@ -1,0 +1,9 @@
+Train data shape: (784, 48000)
+Validation data shape: (784, 12000)
+Test data shape: (784, 10000)
+Traceback (most recent call last):
+  File "C:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\train.py", line 97, in <module>
+    model = NeuralNetwork(layers,
+  File "C:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\new_nn.py", line 33, in __init__
+    self.loss_fx = losses[loss_fn]
+KeyError: 'Cross_entropy_loss'

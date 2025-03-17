@@ -1,0 +1,11 @@
+Train data shape: (784, 48000)
+Validation data shape: (784, 12000)
+Test data shape: (784, 10000)
+Traceback (most recent call last):
+  File "C:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\train.py", line 97, in <module>
+    model = NeuralNetwork(layers,
+  File "C:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\new_nn.py", line 48, in __init__
+    self.init_params(optimizer,optim_params)
+  File "C:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\new_nn.py", line 55, in init_params
+    self.layers[0].W, self.layers[0].b = init.initialize(self.layers[0].X.shape[1], self.layers[0].size)
+AttributeError: 'A_x' object has no attribute 'size'

@@ -1,7 +1,9 @@
-numpy
+numpy==2.2.3
 pandas
 matplotlib
-keras
+seaborn
 scikit-learn
-tqdm
+# tensorflow-gpu22
+keras
+tqdm==4.67.1
 wandb

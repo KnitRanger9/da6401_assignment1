@@ -1,0 +1,7 @@
+Train data shape: (784, 48000)
+Validation data shape: (784, 12000)
+Test data shape: (784, 10000)
+Traceback (most recent call last):
+  File "C:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\train.py", line 90, in <module>
+    layers = [A_x(X_train),
+TypeError: A_x.__init__() missing 1 required positional argument: 'size'

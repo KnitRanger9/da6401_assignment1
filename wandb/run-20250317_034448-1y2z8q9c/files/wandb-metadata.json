@@ -1,0 +1,44 @@
+{
+  "os":  "Windows-10-10.0.26100-SP0",
+  "python":  "CPython 3.10.0",
+  "startedAt":  "2025-03-16T22:14:48.232372Z",
+  "args":  [
+    "--epochs",
+    "20",
+    "--batch_size",
+    "32",
+    "--lr",
+    "0.0005",
+    "--optimizer",
+    "adam",
+    "--hidden_layers",
+    "4",
+    "--sweep"
+  ],
+  "program":  "C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\train.py",
+  "codePath":  "train.py",
+  "git":  {
+    "remote":  "https://github.com/KnitRanger9/da6401_assignment1.git",
+    "commit":  "ee0a6508b42071c7db7a5bdefa063e46b55eedc2"
+  },
+  "email":  "da24m004@smail.iitm.ac.in",
+  "root":  "C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1",
+  "host":  "Aritra",
+  "executable":  "C:\\Users\\aritr\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+  "codePathLocal":  "train.py",
+  "cpu_count":  8,
+  "cpu_count_logical":  16,
+  "disk":  {
+    "/":  {
+      "total":  "509722226688",
+      "used":  "337652641792"
+    }
+  },
+  "memory":  {
+    "total":  "14861852672"
+  },
+  "cpu":  {
+    "count":  8,
+    "countLogical":  16
+  }
+}
