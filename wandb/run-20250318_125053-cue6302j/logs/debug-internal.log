@@ -1,0 +1,16 @@
+{"time":"2025-03-18T12:50:53.2386422+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\wandb\\run-20250318_125053-cue6302j\\logs\\debug-core.log"}
+{"time":"2025-03-18T12:50:53.3600767+05:30","level":"INFO","msg":"created new stream","id":"cue6302j"}
+{"time":"2025-03-18T12:50:53.3606089+05:30","level":"INFO","msg":"handler: started","stream_id":"cue6302j"}
+{"time":"2025-03-18T12:50:53.3606089+05:30","level":"INFO","msg":"stream: started","id":"cue6302j"}
+{"time":"2025-03-18T12:50:53.3606089+05:30","level":"INFO","msg":"sender: started","stream_id":"cue6302j"}
+{"time":"2025-03-18T12:50:53.3606089+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"cue6302j"}
+{"time":"2025-03-18T12:50:53.7585057+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-18T12:51:03.9537403+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-18T12:51:03.9546196+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-18T12:51:04.897114+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-18T12:51:04.9617986+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading history steps 0-10, summary, console lines 0-31","runtime_seconds":0.0646846}],"total_operations":1}}
+{"time":"2025-03-18T12:51:05.2502385+05:30","level":"INFO","msg":"stream: closing","id":"cue6302j"}
+{"time":"2025-03-18T12:51:05.2502385+05:30","level":"INFO","msg":"handler: closed","stream_id":"cue6302j"}
+{"time":"2025-03-18T12:51:05.2502385+05:30","level":"INFO","msg":"sender: closed","stream_id":"cue6302j"}
+{"time":"2025-03-18T12:51:05.2502385+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"cue6302j"}
+{"time":"2025-03-18T12:51:05.2502385+05:30","level":"INFO","msg":"stream: closed","id":"cue6302j"}

@@ -1,0 +1,36 @@
+Initial Accuracy: 0.05976666666666667
+c:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\train_wandb.py:195: RuntimeWarning: overflow encountered in matmul
+  self.pre_activation.append(np.matmul(self.post_activation[-1], self.weights[i]) + self.biases[i])
+c:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\train_wandb.py:195: RuntimeWarning: invalid value encountered in matmul
+  self.pre_activation.append(np.matmul(self.post_activation[-1], self.weights[i]) + self.biases[i])
+Epoch: 1, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 2, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 3, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 4, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 5, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 6, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 7, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 8, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 9, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Epoch: 10, Loss: nan
+Train Accuracy: 0.10005555555555555
+Validation Accuracy: 0.0995
+Test Accuracy: 0.1

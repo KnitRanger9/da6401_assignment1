@@ -1,0 +1,69 @@
+_wandb:
+    value:
+        cli_version: 0.19.8
+        m: []
+        python_version: 3.10.0
+        t:
+            "1":
+                - 2
+                - 3
+                - 5
+                - 53
+                - 55
+            "2":
+                - 2
+                - 3
+                - 5
+                - 53
+                - 55
+            "3":
+                - 2
+                - 14
+                - 17
+                - 23
+                - 55
+            "4": 3.10.0
+            "5": 0.19.8
+            "8":
+                - 3
+                - 5
+            "12": 0.19.8
+            "13": windows-amd64
+activation:
+    value: relu
+batch_size:
+    value: 64
+beta:
+    value: 0.9
+beta1:
+    value: 0.9
+beta2:
+    value: 0.999
+dataset:
+    value: fashion_mnist
+decay:
+    value: 0.0005
+epochs:
+    value: 10
+epsilon:
+    value: 1e-08
+hidden_layers:
+    value: 2
+input_size:
+    value: 784
+learning_rate:
+    value: 0.1
+loss:
+    value: mean_squared_error
+momentum:
+    value: 0.8
+neurons:
+    value: 128
+optimizer:
+    value: sgd
+output_activation:
+    value: softmax
+output_size:
+    value: 10
+weight_init:
+    value: random

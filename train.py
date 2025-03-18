@@ -331,6 +331,7 @@ def train(args):
     best_epoch = 0
     best_model_weights = None
     best_model_biases = None
+    parameters = wandb.config
 
     nn = FFNeuralNetwork(input_size=784,
                          hid_layers=args.num_layers,
@@ -365,18 +366,30 @@ def train(args):
 
             y_pred = nn.forward(x_batch)
             d_weights, d_biases = bp.backward(y_batch, y_pred)
-            opt.run(d_weights, d_biases)
+            opt.run(d_weights, d_biases, y_batch, x_batch)
 
         opt.t += 1
 
         y_pred = nn.forward(x_train_act)
         train_loss = loss(args.loss, y_train_act, y_pred)
         train_accuracy = np.sum(np.argmax(y_pred, axis=1) == np.argmax(y_train_act, axis=1)) / y_train_act.shape[0]
-        val_loss = loss(args.loss, y_val, nn.forward(x_val))
-        val_accuracy = np.sum(np.argmax(nn.forward(x_val), axis=1) == np.argmax(y_val, axis=1)) / y_val.shape[0]
+        val_pred = nn.forward(x_val)
+        val_loss = loss(args.loss, y_val, val_pred)
+        val_accuracy = np.sum(np.argmax(val_pred, axis=1) == np.argmax(y_val, axis=1)) / y_val.shape[0]
+
+        print(f"Epoch: {epoch + 1}, Loss: {train_loss}")
+        print(f"Train Accuracy: {train_accuracy}")
+        print(f"Validation Accuracy: {val_accuracy}")
+
+        wandb.log({
+            "epoch": epoch + 1,
+            "train_loss": train_loss,
+            "train_accuracy": train_accuracy,
+            "val_loss": val_loss,
+            "val_accuracy": val_accuracy
+        })
+
         
-        print(f"Epoch: {epoch + 1}, Train Loss: {train_loss}, Train Accuracy: {train_accuracy}")
-        print(f"Validation Loss: {val_loss}, Validation Accuracy: {val_accuracy}")
 
         if train_accuracy > best_accuracy:
             best_accuracy = train_accuracy
@@ -395,6 +408,7 @@ def train(args):
     print(conf_matrix)
     
     print(f"Test Accuracy: {test_accuracy}")
+    wandb.log({"test_accuracy": test_accuracy})
 
     return nn
 
@@ -496,6 +510,7 @@ def compute_confusion_matrix(y_true, y_pred, num_classes=10):
 def train_sweep():
     run = wandb.init()
     parameters = wandb.config
+    
     run.name = f"{parameters['activation']}_neurons={parameters['neurons']}_layers={parameters['hidden_layers']}_lr={parameters['learning_rate']}_batch={parameters['batch_size']}_opt={parameters['optimizer']}_mom={parameters['momentum']}_init={parameters['weight_init']}"
     
     x_train, y_train = load_data('train', dataset=parameters['dataset'])
@@ -529,7 +544,7 @@ def train_sweep():
     print("Initial Accuracy: {}".format(np.sum(np.argmax(nn.forward(x_train), axis=1) == np.argmax(y_train, axis=1)) / y_train.shape[0]))
     
 
-    for epoch in range(parameters['epochs']):
+    for epoch in range(args.epochs):
         for i in range(0, x_train_act.shape[0], batch_size):
             x_batch = x_train_act[i:i+batch_size]
             y_batch = y_train_act[i:i+batch_size]
@@ -541,10 +556,10 @@ def train_sweep():
         opt.t += 1
 
         y_pred = nn.forward(x_train_act)
-        train_loss = loss(parameters['loss'], y_train_act, y_pred)
+        train_loss = loss(args.loss, y_train_act, y_pred)
         train_accuracy = np.sum(np.argmax(y_pred, axis=1) == np.argmax(y_train_act, axis=1)) / y_train_act.shape[0]
         val_pred = nn.forward(x_val)
-        val_loss = loss(parameters['loss'], y_val, val_pred)
+        val_loss = loss(args.loss, y_val, val_pred)
         val_accuracy = np.sum(np.argmax(val_pred, axis=1) == np.argmax(y_val, axis=1)) / y_val.shape[0]
 
         print(f"Epoch: {epoch + 1}, Loss: {train_loss}")
@@ -577,7 +592,7 @@ def train_sweep():
         best_nn.biases = [b.copy() for b in nn.biases]
 
     # After training is complete, log confusion matrix
-    x_test, y_test = load_data('test', dataset=parameters['dataset'])
+    x_test, y_test = load_data('test', dataset=args.dataset)
     y_pred_test = nn.forward(x_test)
     test_accuracy = np.sum(np.argmax(y_pred_test, axis=1) == np.argmax(y_test, axis=1)) / y_test.shape[0]
     
@@ -646,7 +661,7 @@ def update_sweep_config(config, args):
 # Adding the main execution block
 if __name__ == "__main__":
     args = parse_args()
-    
+    wandb.init(project=args.wandb_project, entity=args.wandb_entity)
     if args.wandb_project:
         # If running with wandb integration
         if args.sweep:
@@ -661,7 +676,7 @@ if __name__ == "__main__":
                 train(args)
         else:
             # Regular training with wandb
-            wandb.init(project=args.wandb_project, entity=args.wandb_entity)
+            
             nn = train(args)
             wandb.finish()
 

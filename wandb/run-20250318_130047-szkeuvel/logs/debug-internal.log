@@ -1,0 +1,16 @@
+{"time":"2025-03-18T13:00:47.8216729+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\wandb\\run-20250318_130047-szkeuvel\\logs\\debug-core.log"}
+{"time":"2025-03-18T13:00:47.9430982+05:30","level":"INFO","msg":"created new stream","id":"szkeuvel"}
+{"time":"2025-03-18T13:00:47.9436437+05:30","level":"INFO","msg":"stream: started","id":"szkeuvel"}
+{"time":"2025-03-18T13:00:47.9436437+05:30","level":"INFO","msg":"sender: started","stream_id":"szkeuvel"}
+{"time":"2025-03-18T13:00:47.9436437+05:30","level":"INFO","msg":"handler: started","stream_id":"szkeuvel"}
+{"time":"2025-03-18T13:00:47.9436437+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"szkeuvel"}
+{"time":"2025-03-18T13:00:48.3811144+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-18T13:01:14.5881818+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-18T13:01:14.5886887+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-18T13:01:15.5788164+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-18T13:01:15.6051003+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading history steps 5-10, summary, console lines 16-31","runtime_seconds":0.0257759}],"total_operations":1}}
+{"time":"2025-03-18T13:01:15.9008525+05:30","level":"INFO","msg":"stream: closing","id":"szkeuvel"}
+{"time":"2025-03-18T13:01:15.9008525+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"szkeuvel"}
+{"time":"2025-03-18T13:01:15.9008525+05:30","level":"INFO","msg":"handler: closed","stream_id":"szkeuvel"}
+{"time":"2025-03-18T13:01:15.9008525+05:30","level":"INFO","msg":"sender: closed","stream_id":"szkeuvel"}
+{"time":"2025-03-18T13:01:15.9015507+05:30","level":"INFO","msg":"stream: closed","id":"szkeuvel"}

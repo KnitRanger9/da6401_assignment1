@@ -1,0 +1,16 @@
+{"time":"2025-03-18T13:09:21.9451808+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\wandb\\run-20250318_130921-pm3hogah\\logs\\debug-core.log"}
+{"time":"2025-03-18T13:09:22.0659577+05:30","level":"INFO","msg":"created new stream","id":"pm3hogah"}
+{"time":"2025-03-18T13:09:22.0659577+05:30","level":"INFO","msg":"stream: started","id":"pm3hogah"}
+{"time":"2025-03-18T13:09:22.0659577+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"pm3hogah"}
+{"time":"2025-03-18T13:09:22.0659577+05:30","level":"INFO","msg":"handler: started","stream_id":"pm3hogah"}
+{"time":"2025-03-18T13:09:22.0664965+05:30","level":"INFO","msg":"sender: started","stream_id":"pm3hogah"}
+{"time":"2025-03-18T13:09:22.4297533+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-18T13:09:43.8477483+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-18T13:09:43.8482877+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-18T13:09:44.8634608+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading output.log","runtime_seconds":0.7231604,"progress":"1.0KB/1.0KB"},{"desc":"uploading config.yaml","runtime_seconds":0.4440851,"progress":"1.1KB/1.1KB"}],"total_operations":2}}
+{"time":"2025-03-18T13:09:45.441872+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-18T13:09:45.7535889+05:30","level":"INFO","msg":"stream: closing","id":"pm3hogah"}
+{"time":"2025-03-18T13:09:45.7535889+05:30","level":"INFO","msg":"handler: closed","stream_id":"pm3hogah"}
+{"time":"2025-03-18T13:09:45.7535889+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"pm3hogah"}
+{"time":"2025-03-18T13:09:45.7545918+05:30","level":"INFO","msg":"sender: closed","stream_id":"pm3hogah"}
+{"time":"2025-03-18T13:09:45.7545918+05:30","level":"INFO","msg":"stream: closed","id":"pm3hogah"}

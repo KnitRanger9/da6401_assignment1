@@ -1,0 +1,20 @@
+{"time":"2025-03-18T10:55:01.5340924+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\wandb\\run-20250318_105501-rpfg0j41\\logs\\debug-core.log"}
+{"time":"2025-03-18T10:55:01.6626115+05:30","level":"INFO","msg":"created new stream","id":"rpfg0j41"}
+{"time":"2025-03-18T10:55:01.6626115+05:30","level":"INFO","msg":"stream: started","id":"rpfg0j41"}
+{"time":"2025-03-18T10:55:01.6626115+05:30","level":"INFO","msg":"sender: started","stream_id":"rpfg0j41"}
+{"time":"2025-03-18T10:55:01.6626115+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"rpfg0j41"}
+{"time":"2025-03-18T10:55:01.6626115+05:30","level":"INFO","msg":"handler: started","stream_id":"rpfg0j41"}
+{"time":"2025-03-18T10:55:02.0461897+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-18T10:55:03.576315+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-18T10:55:03.577303+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-18T10:55:04.5982592+05:30","level":"INFO","msg":"handler: operation stats","stats":{}}
+{"time":"2025-03-18T10:55:21.3582724+05:30","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp 192.168.0.101:56847->35.186.228.49:443: wsarecv: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond."}
+{"time":"2025-03-18T10:55:21.3582724+05:30","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp 192.168.0.101:56847->35.186.228.49:443: wsarecv: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond."}
+{"time":"2025-03-18T10:55:21.3582724+05:30","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp 192.168.0.101:56847->35.186.228.49:443: wsarecv: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond."}
+{"time":"2025-03-18T10:55:21.3582724+05:30","level":"INFO","msg":"api: retrying error","error":"Post \"https://api.wandb.ai/graphql\": read tcp 192.168.0.101:56847->35.186.228.49:443: wsarecv: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond."}
+{"time":"2025-03-18T10:55:33.6730372+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-18T10:55:33.9945157+05:30","level":"INFO","msg":"stream: closing","id":"rpfg0j41"}
+{"time":"2025-03-18T10:55:33.9945157+05:30","level":"INFO","msg":"handler: closed","stream_id":"rpfg0j41"}
+{"time":"2025-03-18T10:55:33.9945157+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"rpfg0j41"}
+{"time":"2025-03-18T10:55:33.9945157+05:30","level":"INFO","msg":"sender: closed","stream_id":"rpfg0j41"}
+{"time":"2025-03-18T10:55:33.9945157+05:30","level":"INFO","msg":"stream: closed","id":"rpfg0j41"}

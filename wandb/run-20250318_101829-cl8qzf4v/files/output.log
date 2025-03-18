@@ -1,0 +1,9 @@
+Initial Accuracy: 0.12315
+Traceback (most recent call last):
+  File "C:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\train.py", line 680, in <module>
+    nn = train(args)
+  File "C:\Users\aritr\Downloads\DA5401\Assignment1\da6401_assignment1\train.py", line 362, in train
+    for epoch in range(parameters['parameters']['epochs']['value']):
+  File "C:\Users\aritr\AppData\Local\Programs\Python\Python310\lib\site-packages\wandb\sdk\wandb_config.py", line 130, in __getitem__
+    return self._items[key]
+KeyError: 'parameters'

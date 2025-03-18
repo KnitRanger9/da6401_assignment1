@@ -7,7 +7,7 @@ import wandb
 
 CLASS_NAMES = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
 
-WANDB_PROJECT = "neural-network-sweep"
+WANDB_PROJECT = "neural-network-sweep_mse"
 DATASET = "fashion_mnist"
 EPOCHS = 10
 
@@ -52,7 +52,7 @@ sweep_configuration = {
                 'value': 10
             },
             'loss': {
-                'value': 'cross_entropy'
+                'value': 'mean_squared_error' #'cross_entropy'
             },
             'epochs': {
                 'value': 10
@@ -246,6 +246,8 @@ class Backpropagation():
         if self.nn.output_activation_function == "softmax" and self.loss == "cross_entropy":
             return y_pred - y_true
         # For other combinations, we need the full Jacobian
+        elif self.nn.output_activation_function == "softmax" and self.loss == "mean_squared_error":
+            return (y_pred - y_true)**2
         elif self.nn.output_activation_function == "softmax":
             m = y_pred.shape[0]
             jacobians = np.zeros((m, y_pred.shape[1], y_pred.shape[1]))
@@ -266,6 +268,8 @@ class Backpropagation():
 
         # For softmax + cross-entropy, the gradient simplifies
         if self.nn.output_activation_function == "softmax" and self.loss == "cross_entropy":
+            delta = (y_pred - y) / m
+        elif self.nn.output_activation_function == "softmax" and self.loss == "mean_squared_error":
             delta = (y_pred - y) / m
         else:
             # General case (not efficient for large networks)
@@ -523,9 +527,7 @@ def train_sweep():
     run.name = f"{parameters['activation']}_neurons={parameters['neurons']}_layers={parameters['hidden_layers']}_lr={parameters['learning_rate']}_batch={parameters['batch_size']}_opt={parameters['optimizer']}_mom={parameters['momentum']}_init={parameters['weight_init']}"
     
     x_train, y_train = load_data('train', dataset=parameters['dataset'])
-    best_accuracy = 0
-    best_params = None
-    best_nn = None
+    
 
     nn = FFNeuralNetwork(input_size=parameters['input_size'],
                          hid_layers=parameters['hidden_layers'],
@@ -587,22 +589,7 @@ def train_sweep():
             "val_accuracy": val_accuracy
         })
 
-        if val_accuracy > best_accuracy:  # Changed to use validation accuracy instead of training accuracy
-            
-            best_params = parameters  # Create a copy of parameters
-            # Create a deep copy of the neural network
-            best_nn = FFNeuralNetwork(
-                neurons=nn.neurons,
-                hid_layers=nn.hidden_layers,
-                input_size=nn.input_size,
-                output_size=nn.output_size,
-                act_func=nn.activation_function,
-                weight_init=nn.weight_init,
-                out_act_func=nn.output_activation_function,
-                init_toggle=False
-            )
-            best_nn.weights = [w.copy() for w in nn.weights]
-            best_nn.biases = [b.copy() for b in nn.biases]
+        
 
     # After training is complete, log confusion matrix
     x_test, y_test = load_data('test', dataset=parameters['dataset'])
@@ -611,32 +598,9 @@ def train_sweep():
     
     print(f"Test Accuracy: {test_accuracy}")
     wandb.log({"test_accuracy": test_accuracy})
-    if best_nn is not None:
-        best_y_pred = best_nn.forward(x_test)
-        best_test_accuracy = np.sum(np.argmax(best_y_pred, axis=1) == np.argmax(y_test, axis=1)) / y_test.shape[0]
+    
 
-        conf_matrix = compute_confusion_matrix(y_test, best_y_pred)
-
-        print("Best Parameters (Based on Validation Accuracy):")
-        for key, value in best_params.items():
-            if key in ['input_size', 'output_size', 'loss', 'epochs', 'output_activation', 'dataset']:
-                continue
-            print(f"  {key}: {value}")
-        print(f"Best Validation Accuracy: {best_accuracy}")
-        print(f"Test Accuracy with Best Parameters: {best_test_accuracy}")
-        print("Confusion Matrix (Best Parameters):")
-        print(conf_matrix)
-
-        wandb.log({
-            "confusion_matrix": wandb.plot.confusion_matrix(
-                probs=None, 
-                y_true=np.argmax(y_test, axis=1), 
-                preds=np.argmax(best_y_pred, axis=1), 
-                class_names=CLASS_NAMES
-            )
-        })
-
-    return best_params, best_nn
+    return nn
 
 def run_sweep(sweep_conf=sweep_configuration):
     print("Logging into W&B...")
@@ -647,52 +611,18 @@ def run_sweep(sweep_conf=sweep_configuration):
     
     print(f"Sweep ID: {sweep_id}")
     print("Running sweep agent...")
-    wandb.agent(sweep_id, function=train_sweep, count=50)
+    wandb.agent(sweep_id, function=train_sweep, count=100)
     # api = wandb.Api()
     # sweep = api.sweep(f"your-username/your-project-name/{sweep_id}")
     # best_run = sweep.best_run()
-
-    best_params = {
-        'activation': wandb.run.summary['best_activation'],
-        'neurons': wandb.run.summary['best_neurons'],
-        'hidden_layers': wandb.run.summary['best_hidden_layers'],
-        'learning_rate': wandb.run.summary['best_learning_rate'],
-        'batch_size': wandb.run.summary['best_batch_size'],
-        'optimizer': wandb.run.summary['best_optimizer'],
-        'momentum': wandb.run.summary['best_momentum'],
-        'weight_init': wandb.run.summary['best_weight_init'],
-        # Add other parameters as needed
-    }
-
-    x_test, y_test = load_data('test', dataset=fashion_mnist)
-
-    best_model = FFNeuralNetwork(
-        input_size=sweep_configuration['input_size'],
-        hid_layers=best_params['hidden_layers'],
-        neurons=best_params['neurons'],
-        output_size=sweep_configuration['output_size'],
-        act_func=best_params['activation'],
-        out_act_func='softmax',  # Adjust as needed
-        weight_init=best_params['weight_init']
-    )
-
-    # wandb.init(project="your-project-name", name="final_best_model")
-    y_pred = best_model.forward(x_test)
-
-    wandb.plot.confusion_matrix(
-        probs=None, 
-        y_true=np.argmax(y_test, axis=1), 
-        preds=np.argmax(y_pred, axis=1), 
-        class_names=CLASS_NAMES
-    )
     
     print("Sweep completed!")
 
 if __name__ == "__main__":
     log_examples()
     
-    run_sweep(sweep_configuration)
-    sweep_configuration['parameters']['loss']['value'] = 'mean_squared_error'
+    # run_sweep(sweep_configuration)
+    # sweep_configuration['parameters']['loss']['value'] = 'mean_squared_error'
     run_sweep(sweep_configuration)
     # sweep_configuration['parameters']['dataset']['value'] = 'mnist'
     # run_sweep(sweep_configuration)

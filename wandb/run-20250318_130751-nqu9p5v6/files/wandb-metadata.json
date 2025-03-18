@@ -1,0 +1,31 @@
+{
+  "os":  "Windows-10-10.0.26100-SP0",
+  "python":  "CPython 3.10.0",
+  "startedAt":  "2025-03-18T07:37:51.925864Z",
+  "program":  "c:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\train_wandb.py",
+  "codePath":  "train_wandb.py",
+  "git":  {
+    "remote":  "https://github.com/KnitRanger9/da6401_assignment1.git",
+    "commit":  "9aa2f35f11d9c7d6f157966745e7bfb33575c695"
+  },
+  "email":  "da24m004@smail.iitm.ac.in",
+  "root":  "C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1",
+  "host":  "Aritra",
+  "executable":  "C:\\Users\\aritr\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+  "codePathLocal":  "train_wandb.py",
+  "cpu_count":  8,
+  "cpu_count_logical":  16,
+  "disk":  {
+    "/":  {
+      "total":  "509722226688",
+      "used":  "314127437824"
+    }
+  },
+  "memory":  {
+    "total":  "14861852672"
+  },
+  "cpu":  {
+    "count":  8,
+    "countLogical":  16
+  }
+}

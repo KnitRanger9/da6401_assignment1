@@ -1,0 +1,32 @@
+Initial Accuracy: 0.12496666666666667
+Epoch: 1, Loss: 0.35362864647176817
+Train Accuracy: 0.3322037037037037
+Validation Accuracy: 0.3253333333333333
+Epoch: 2, Loss: 0.3611585856045706
+Train Accuracy: 0.2944259259259259
+Validation Accuracy: 0.2895
+Epoch: 3, Loss: 0.35294010046611296
+Train Accuracy: 0.3087962962962963
+Validation Accuracy: 0.3085
+Epoch: 4, Loss: 0.340879831460173
+Train Accuracy: 0.3348333333333333
+Validation Accuracy: 0.3308333333333333
+Epoch: 5, Loss: 0.34173179775903395
+Train Accuracy: 0.3347962962962963
+Validation Accuracy: 0.33466666666666667
+Epoch: 6, Loss: 0.29746459476576304
+Train Accuracy: 0.43392592592592594
+Validation Accuracy: 0.43316666666666664
+Epoch: 7, Loss: 0.2964642901801964
+Train Accuracy: 0.4355925925925926
+Validation Accuracy: 0.4375
+Epoch: 8, Loss: 0.2652527418055439
+Train Accuracy: 0.5047222222222222
+Validation Accuracy: 0.49183333333333334
+Epoch: 9, Loss: 0.26383537695049347
+Train Accuracy: 0.5152777777777777
+Validation Accuracy: 0.5028333333333334
+Epoch: 10, Loss: 0.25634392083027835
+Train Accuracy: 0.5157777777777778
+Validation Accuracy: 0.509
+Test Accuracy: 0.5151

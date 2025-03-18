@@ -1,0 +1,28 @@
+Initial Accuracy: 0.05876666666666667
+Epoch: 1, Loss: 19091.986557077747
+Train Accuracy: 0.9018148148148148
+Validation Accuracy: 0.9008333333333334
+Epoch: 2, Loss: 15888.260618158443
+Train Accuracy: 0.9168703703703703
+Validation Accuracy: 0.9131666666666667
+Epoch: 3, Loss: 14038.240433034429
+Train Accuracy: 0.9260925925925926
+Validation Accuracy: 0.9216666666666666
+Epoch: 4, Loss: 12636.389286857855
+Train Accuracy: 0.9332407407407407
+Validation Accuracy: 0.9278333333333333
+Epoch: 5, Loss: 11531.274559504807
+Train Accuracy: 0.9391111111111111
+Validation Accuracy: 0.9326666666666666
+Confusion Matrix (Best Model, Training Accuracy: 0.9391111111111111):
+[[ 961    0    2    1    0    3   10    1    2    0]
+ [   0 1115    3    2    0    1    3    2    9    0]
+ [   6    1  966    9   11    4    9   10   13    3]
+ [   2    0   23  907    2   33    3   17   15    8]
+ [   1    2    5    1  923    0   11    2    3   34]
+ [  10    3    6   16    7  810   15    4   13    8]
+ [  11    3    5    0   10    8  918    2    1    0]
+ [   3    7   23    4    6    1    0  963    0   21]
+ [   9    6    7   15   10   17   14    9  880    7]
+ [   9    6    1    8   29    6    1   12    3  934]]
+Test Accuracy: 0.9377

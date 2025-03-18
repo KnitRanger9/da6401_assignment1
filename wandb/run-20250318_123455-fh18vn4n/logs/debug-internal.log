@@ -1,0 +1,16 @@
+{"time":"2025-03-18T12:34:55.705276+05:30","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"C:\\Users\\aritr\\Downloads\\DA5401\\Assignment1\\da6401_assignment1\\wandb\\run-20250318_123455-fh18vn4n\\logs\\debug-core.log"}
+{"time":"2025-03-18T12:34:55.8220491+05:30","level":"INFO","msg":"created new stream","id":"fh18vn4n"}
+{"time":"2025-03-18T12:34:55.8226099+05:30","level":"INFO","msg":"stream: started","id":"fh18vn4n"}
+{"time":"2025-03-18T12:34:55.8226099+05:30","level":"INFO","msg":"handler: started","stream_id":"fh18vn4n"}
+{"time":"2025-03-18T12:34:55.8226099+05:30","level":"INFO","msg":"sender: started","stream_id":"fh18vn4n"}
+{"time":"2025-03-18T12:34:55.8226099+05:30","level":"INFO","msg":"writer: Do: started","stream_id":"fh18vn4n"}
+{"time":"2025-03-18T12:34:56.1632127+05:30","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-03-18T12:35:05.481717+05:30","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-03-18T12:35:05.4826047+05:30","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-03-18T12:35:06.4947574+05:30","level":"INFO","msg":"handler: operation stats","stats":{"operations":[{"desc":"uploading output.log","runtime_seconds":0.7147778,"progress":"1.1KB/1.1KB"},{"desc":"uploading config.yaml","runtime_seconds":0.4108635,"progress":"1.1KB/1.1KB"}],"total_operations":2}}
+{"time":"2025-03-18T12:35:07.0445305+05:30","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-03-18T12:35:07.4223278+05:30","level":"INFO","msg":"stream: closing","id":"fh18vn4n"}
+{"time":"2025-03-18T12:35:07.4223278+05:30","level":"INFO","msg":"handler: closed","stream_id":"fh18vn4n"}
+{"time":"2025-03-18T12:35:07.4223278+05:30","level":"INFO","msg":"writer: Close: closed","stream_id":"fh18vn4n"}
+{"time":"2025-03-18T12:35:07.4223278+05:30","level":"INFO","msg":"sender: closed","stream_id":"fh18vn4n"}
+{"time":"2025-03-18T12:35:07.4228361+05:30","level":"INFO","msg":"stream: closed","id":"fh18vn4n"}
